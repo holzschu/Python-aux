@@ -6,6 +6,7 @@ git submodule update --init --recursive
 export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
 
 pushd libffi
+# we need to patch libffi to allow compilation with Xcode12, but only once:
 # patch -p1 < ../libffi.patch 
 xcodebuild -project libffi.xcodeproj -target libffi-iOS -sdk iphoneos -arch arm64 -configuration Debug -quiet
 xcodebuild -project libffi.xcodeproj -target libffi-iOS -sdk iphonesimulator -configuration Debug -quiet

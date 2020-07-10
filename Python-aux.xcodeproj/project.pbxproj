@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22DCD89E24B89C2F00203A0E /* libpng.h in Headers */ = {isa = PBXBuildFile; fileRef = 22DCD89C24B89C2F00203A0E /* libpng.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22DCD8A524B8B1DA00203A0E /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DCD8A424B8B1D900203A0E /* libpng16.a */; };
+		22DCD8AF24B8DB3100203A0E /* libffi.h in Headers */ = {isa = PBXBuildFile; fileRef = 22DCD8AD24B8DB3100203A0E /* libffi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22DCD8B524B8DBE100203A0E /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DCD8B424B8DBE100203A0E /* libffi.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		22DCD88D24B8990200203A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22DCD89A24B89C2F00203A0E /* libpng.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libpng.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DCD89C24B89C2F00203A0E /* libpng.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libpng.h; sourceTree = "<group>"; };
+		22DCD89D24B89C2F00203A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22DCD8A424B8B1D900203A0E /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = "libpng-1.6.37/libpng16.a"; sourceTree = "<group>"; };
+		22DCD8AB24B8DB3100203A0E /* libffi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libffi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DCD8AD24B8DB3100203A0E /* libffi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libffi.h; sourceTree = "<group>"; };
+		22DCD8AE24B8DB3100203A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22DCD8B424B8DBE100203A0E /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22DCD89724B89C2F00203A0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22DCD8A524B8B1DA00203A0E /* libpng16.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22DCD8A824B8DB3100203A0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22DCD8B524B8DBE100203A0E /* libffi.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22DCD87F24B8990200203A0E = {
+			isa = PBXGroup;
+			children = (
+				22DCD88B24B8990200203A0E /* Python-aux */,
+				22DCD89B24B89C2F00203A0E /* libpng */,
+				22DCD8AC24B8DB3100203A0E /* libffi */,
+				22DCD88A24B8990200203A0E /* Products */,
+				22DCD8A324B8B1D900203A0E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		22DCD88A24B8990200203A0E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22DCD89A24B89C2F00203A0E /* libpng.framework */,
+				22DCD8AB24B8DB3100203A0E /* libffi.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22DCD88B24B8990200203A0E /* Python-aux */ = {
+			isa = PBXGroup;
+			children = (
+				22DCD88D24B8990200203A0E /* Info.plist */,
+			);
+			path = "Python-aux";
+			sourceTree = "<group>";
+		};
+		22DCD89B24B89C2F00203A0E /* libpng */ = {
+			isa = PBXGroup;
+			children = (
+				22DCD89C24B89C2F00203A0E /* libpng.h */,
+				22DCD89D24B89C2F00203A0E /* Info.plist */,
+			);
+			path = libpng;
+			sourceTree = "<group>";
+		};
+		22DCD8A324B8B1D900203A0E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22DCD8B424B8DBE100203A0E /* libffi.a */,
+				22DCD8A424B8B1D900203A0E /* libpng16.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22DCD8AC24B8DB3100203A0E /* libffi */ = {
+			isa = PBXGroup;
+			children = (
+				22DCD8AD24B8DB3100203A0E /* libffi.h */,
+				22DCD8AE24B8DB3100203A0E /* Info.plist */,
+			);
+			path = libffi;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		22DCD89524B89C2F00203A0E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22DCD89E24B89C2F00203A0E /* libpng.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22DCD8A624B8DB3100203A0E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22DCD8AF24B8DB3100203A0E /* libffi.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		22DCD89924B89C2F00203A0E /* libpng */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22DCD8A124B89C2F00203A0E /* Build configuration list for PBXNativeTarget "libpng" */;
+			buildPhases = (
+				22DCD8A224B89C3A00203A0E /* ShellScript */,
+				22DCD89524B89C2F00203A0E /* Headers */,
+				22DCD89624B89C2F00203A0E /* Sources */,
+				22DCD89724B89C2F00203A0E /* Frameworks */,
+				22DCD89824B89C2F00203A0E /* Resources */,
+				22DCD8B624B8F43900203A0E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libpng;
+			productName = libpng;
+			productReference = 22DCD89A24B89C2F00203A0E /* libpng.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		22DCD8AA24B8DB3100203A0E /* libffi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22DCD8B024B8DB3100203A0E /* Build configuration list for PBXNativeTarget "libffi" */;
+			buildPhases = (
+				22DCD8A624B8DB3100203A0E /* Headers */,
+				22DCD8A724B8DB3100203A0E /* Sources */,
+				22DCD8A824B8DB3100203A0E /* Frameworks */,
+				22DCD8A924B8DB3100203A0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libffi;
+			productName = libffi;
+			productReference = 22DCD8AB24B8DB3100203A0E /* libffi.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22DCD88024B8990200203A0E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					22DCD89924B89C2F00203A0E = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					22DCD8AA24B8DB3100203A0E = {
+						CreatedOnToolsVersion = 12.0;
+					};
+				};
+			};
+			buildConfigurationList = 22DCD88324B8990200203A0E /* Build configuration list for PBXProject "Python-aux" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22DCD87F24B8990200203A0E;
+			productRefGroup = 22DCD88A24B8990200203A0E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22DCD89924B89C2F00203A0E /* libpng */,
+				22DCD8AA24B8DB3100203A0E /* libffi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22DCD89824B89C2F00203A0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22DCD8A924B8DB3100203A0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		22DCD8A224B89C3A00203A0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncurl -OL https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz\ntar xvzf libpng-1.6.37.tar.gz\nrm libpng-1.6.37.tar.gz\nexport DYLD_ROOT_PATH\\=/Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk\n\ncd libpng-1.6.37\n./configure CC=clang CXX=clang++ CFLAGS=\"-arch ${ARCHS} ${DEPLOYMENT_TARGET_CLANG_FLAG_PREFIX}${IPHONEOS_DEPLOYMENT_TARGET} -isysroot ${SDKROOT} -fembed-bitcode\" CPPFLAGS=\"-arch ${ARCHS} ${DEPLOYMENT_TARGET_CLANG_FLAG_PREFIX}${IPHONEOS_DEPLOYMENT_TARGET} -isysroot ${SDKROOT}\" CXXFLAGS=\"-arch ${ARCHS} ${DEPLOYMENT_TARGET_CLANG_FLAG_PREFIX}${IPHONEOS_DEPLOYMENT_TARGET} -isysroot ${SDKROOT} -fembed-bitcode\"  --build=x86_64-apple-darwin --host=${NATIVE_ARCH}-apple-darwin cross_compiling=yes\nmake -j4 --quiet\ncd ..\n";
+		};
+		22DCD8B624B8F43900203A0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd libpng-1.6.37\nmake distclean\ncd ..\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22DCD89624B89C2F00203A0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22DCD8A724B8DB3100203A0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		22DCD88F24B8990200203A0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		22DCD89024B8990200203A0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		22DCD89F24B89C2F00203A0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VG8Z23C8YL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = libpng/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libpng-1.6.37",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-L",
+					"libpng-1.6.37/.libs/",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AsheKube.libpng;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		22DCD8A024B89C2F00203A0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VG8Z23C8YL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = libpng/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libpng-1.6.37",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-L",
+					"libpng-1.6.37/.libs/",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AsheKube.libpng;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
+		22DCD8B124B8DB3100203A0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VG8Z23C8YL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = libffi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-L",
+					"libffi/build/Debug${EFFECTIVE_PLATFORM_NAME}",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AsheKube.libffi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22DCD8B224B8DB3100203A0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VG8Z23C8YL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = libffi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-L",
+					"libffi/build/Debug${EFFECTIVE_PLATFORM_NAME}",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AsheKube.libffi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22DCD88324B8990200203A0E /* Build configuration list for PBXProject "Python-aux" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DCD88F24B8990200203A0E /* Debug */,
+				22DCD89024B8990200203A0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22DCD8A124B89C2F00203A0E /* Build configuration list for PBXNativeTarget "libpng" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DCD89F24B89C2F00203A0E /* Debug */,
+				22DCD8A024B89C2F00203A0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22DCD8B024B8DB3100203A0E /* Build configuration list for PBXNativeTarget "libffi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DCD8B124B8DB3100203A0E /* Debug */,
+				22DCD8B224B8DB3100203A0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22DCD88024B8990200203A0E /* Project object */;
+}
