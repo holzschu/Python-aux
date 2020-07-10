@@ -13,12 +13,12 @@ let package = Package(
         .binaryTarget(
             name: "libpng",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libpng.xcframework.zip",
-            checksum: "d88a7fe745950eec19fc6f69321b853ee98eda75a9730d64a46d94c0de4d06b9"
+            checksum: "164188f7710c5a5d252d1f3868375ede944c9b2ac1ca6c3b4b0e25ae5f29bde2"
         ),
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "f75b0388d255e38f861daf7012d0842842a33594619312db7e34bc311c815da8"
+            checksum: "575a4e6fe83136ad14abc1f87c1700b3b2f4061a9e2dd32c4dd3505e304a9ea0"
         )
     ]
 )

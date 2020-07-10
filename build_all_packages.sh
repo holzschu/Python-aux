@@ -13,11 +13,8 @@ popd
 
 
 # First, creat all frameworks for both architectures: 
-rm -f libffi.a
 xcodebuild -project Python-aux.xcodeproj -alltargets -sdk iphoneos -configuration Release -quiet
-rm -f libffi.a
 xcodebuild -project Python-aux.xcodeproj -alltargets -sdk iphonesimulator -configuration Release -quiet
-
 
 # then, merge them into XCframeworks:
 for framework in libpng libffi
