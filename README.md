@@ -10,4 +10,6 @@ In the rightmost column, you will see "Swift Package Dependencies", and under it
 
 ## How to compile: 
 
-TODO.
+In this repository, run `build_all_packages.sh`. This will update the code, compile the packages, create the frameworks, create and compress the xcframeworks and output the hash sums.
+
+For use in your own repository, update the hash sums in `Package.swift`, publish the xcframeworks.zip in the right place and enjoy.
