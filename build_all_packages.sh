@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# update libffi source:
+# update libffi and libzmq source:
 git submodule update --init --recursive
 
+# Required with Xcode 12 beta:
 export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
 
 pushd libffi
@@ -12,13 +13,17 @@ xcodebuild -project libffi.xcodeproj -target libffi-iOS -sdk iphoneos -arch arm6
 xcodebuild -project libffi.xcodeproj -target libffi-iOS -sdk iphonesimulator -configuration Debug -quiet
 popd 
 
+pushd libzmq
+sh builds/ios/build_ios.sh
+popd
 
-# First, creat all frameworks for both architectures: 
+
+# Now, creat all frameworks for both architectures: 
 xcodebuild -project Python-aux.xcodeproj -alltargets -sdk iphoneos -configuration Release -quiet
 xcodebuild -project Python-aux.xcodeproj -alltargets -sdk iphonesimulator -configuration Release -quiet
 
 # then, merge them into XCframeworks:
-for framework in libpng libffi
+for framework in libpng libffi libzmq
 do
    rm -rf $framework.xcframework
    xcodebuild -create-xcframework -framework build/Release-iphoneos/$framework.framework -framework build/Release-iphonesimulator/$framework.framework -output $framework.xcframework
@@ -29,4 +34,4 @@ do
 done
 
 
-
+# freetype, harfbuzz, openblas

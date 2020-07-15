@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221722C724BF943400064652 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 221722C624BF943400064652 /* libzmq.a */; };
+		22C1E8C024BF8B7600C57472 /* libzmq.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8BE24BF8B7600C57472 /* libzmq.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8C824BF8C5500C57472 /* zmq_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8C624BF8C5500C57472 /* zmq_utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8C924BF8C5600C57472 /* zmq.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8C724BF8C5500C57472 /* zmq.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D224BF8D2400C57472 /* ffi_arm64.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8D124BF8CF300C57472 /* ffi_arm64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D324BF8D2900C57472 /* ffi_armv7.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8CC24BF8CF300C57472 /* ffi_armv7.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D424BF8D3A00C57472 /* ffi_x86_64.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8CD24BF8CF300C57472 /* ffi_x86_64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D524BF8D3E00C57472 /* ffi.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8CF24BF8CF300C57472 /* ffi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D624BF8D4000C57472 /* ffitarget_arm64.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8CA24BF8CF200C57472 /* ffitarget_arm64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D724BF8D4200C57472 /* ffitarget_armv7.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8CB24BF8CF200C57472 /* ffitarget_armv7.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D824BF8D4400C57472 /* ffitarget_x86_64.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8D024BF8CF300C57472 /* ffitarget_x86_64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8D924BF8D4600C57472 /* ffitarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8CE24BF8CF300C57472 /* ffitarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8DB24BF8E0300C57472 /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C1E8DA24BF8E0000C57472 /* png.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22C1E8DD24BF8FF300C57472 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C1E8DC24BF8FF300C57472 /* libc++.tbd */; };
 		22DCD89E24B89C2F00203A0E /* libpng.h in Headers */ = {isa = PBXBuildFile; fileRef = 22DCD89C24B89C2F00203A0E /* libpng.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22DCD8A524B8B1DA00203A0E /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DCD8A424B8B1D900203A0E /* libpng16.a */; };
 		22DCD8AF24B8DB3100203A0E /* libffi.h in Headers */ = {isa = PBXBuildFile; fileRef = 22DCD8AD24B8DB3100203A0E /* libffi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -14,6 +28,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		221722C624BF943400064652 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = libzmq.a; sourceTree = "<group>"; };
+		22C1E8BC24BF8B7600C57472 /* libzmq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libzmq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22C1E8BE24BF8B7600C57472 /* libzmq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libzmq.h; sourceTree = "<group>"; };
+		22C1E8BF24BF8B7600C57472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22C1E8C424BF8BA500C57472 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = libzmq.a; sourceTree = "<group>"; };
+		22C1E8C624BF8C5500C57472 /* zmq_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zmq_utils.h; path = builds/ios/libzmq_build/arm64/include/zmq_utils.h; sourceTree = "<group>"; };
+		22C1E8C724BF8C5500C57472 /* zmq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = zmq.h; path = builds/ios/libzmq_build/arm64/include/zmq.h; sourceTree = "<group>"; };
+		22C1E8CA24BF8CF200C57472 /* ffitarget_arm64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffitarget_arm64.h; path = "build/Debug-iphoneos/include/ffi/ffitarget_arm64.h"; sourceTree = "<group>"; };
+		22C1E8CB24BF8CF200C57472 /* ffitarget_armv7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffitarget_armv7.h; path = "build/Debug-iphoneos/include/ffi/ffitarget_armv7.h"; sourceTree = "<group>"; };
+		22C1E8CC24BF8CF300C57472 /* ffi_armv7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffi_armv7.h; path = "build/Debug-iphoneos/include/ffi/ffi_armv7.h"; sourceTree = "<group>"; };
+		22C1E8CD24BF8CF300C57472 /* ffi_x86_64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffi_x86_64.h; path = "build/Debug-iphoneos/include/ffi/ffi_x86_64.h"; sourceTree = "<group>"; };
+		22C1E8CE24BF8CF300C57472 /* ffitarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffitarget.h; path = "build/Debug-iphoneos/include/ffi/ffitarget.h"; sourceTree = "<group>"; };
+		22C1E8CF24BF8CF300C57472 /* ffi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffi.h; path = "build/Debug-iphoneos/include/ffi/ffi.h"; sourceTree = "<group>"; };
+		22C1E8D024BF8CF300C57472 /* ffitarget_x86_64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffitarget_x86_64.h; path = "build/Debug-iphoneos/include/ffi/ffitarget_x86_64.h"; sourceTree = "<group>"; };
+		22C1E8D124BF8CF300C57472 /* ffi_arm64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ffi_arm64.h; path = "build/Debug-iphoneos/include/ffi/ffi_arm64.h"; sourceTree = "<group>"; };
+		22C1E8DA24BF8E0000C57472 /* png.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = png.h; path = "libpng-1.6.37/png.h"; sourceTree = SOURCE_ROOT; };
+		22C1E8DC24BF8FF300C57472 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.16.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		22DCD88D24B8990200203A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DCD89A24B89C2F00203A0E /* libpng.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libpng.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DCD89C24B89C2F00203A0E /* libpng.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libpng.h; sourceTree = "<group>"; };
@@ -26,6 +57,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		22C1E8B924BF8B7600C57472 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				221722C724BF943400064652 /* libzmq.a in Frameworks */,
+				22C1E8DD24BF8FF300C57472 /* libc++.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22DCD89724B89C2F00203A0E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -45,12 +85,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22C1E8BD24BF8B7600C57472 /* libzmq */ = {
+			isa = PBXGroup;
+			children = (
+				22C1E8C724BF8C5500C57472 /* zmq.h */,
+				22C1E8C624BF8C5500C57472 /* zmq_utils.h */,
+				22C1E8BE24BF8B7600C57472 /* libzmq.h */,
+				22C1E8BF24BF8B7600C57472 /* Info.plist */,
+			);
+			path = libzmq;
+			sourceTree = "<group>";
+		};
 		22DCD87F24B8990200203A0E = {
 			isa = PBXGroup;
 			children = (
 				22DCD88B24B8990200203A0E /* Python-aux */,
 				22DCD89B24B89C2F00203A0E /* libpng */,
 				22DCD8AC24B8DB3100203A0E /* libffi */,
+				22C1E8BD24BF8B7600C57472 /* libzmq */,
 				22DCD88A24B8990200203A0E /* Products */,
 				22DCD8A324B8B1D900203A0E /* Frameworks */,
 			);
@@ -61,6 +113,7 @@
 			children = (
 				22DCD89A24B89C2F00203A0E /* libpng.framework */,
 				22DCD8AB24B8DB3100203A0E /* libffi.framework */,
+				22C1E8BC24BF8B7600C57472 /* libzmq.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				22DCD89C24B89C2F00203A0E /* libpng.h */,
+				22C1E8DA24BF8E0000C57472 /* png.h */,
 				22DCD89D24B89C2F00203A0E /* Info.plist */,
 			);
 			path = libpng;
@@ -85,6 +139,9 @@
 		22DCD8A324B8B1D900203A0E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				221722C624BF943400064652 /* libzmq.a */,
+				22C1E8DC24BF8FF300C57472 /* libc++.tbd */,
+				22C1E8C424BF8BA500C57472 /* libzmq.a */,
 				22DCD8B424B8DBE100203A0E /* libffi.a */,
 				22DCD8A424B8B1D900203A0E /* libpng16.a */,
 			);
@@ -94,6 +151,14 @@
 		22DCD8AC24B8DB3100203A0E /* libffi */ = {
 			isa = PBXGroup;
 			children = (
+				22C1E8D124BF8CF300C57472 /* ffi_arm64.h */,
+				22C1E8CC24BF8CF300C57472 /* ffi_armv7.h */,
+				22C1E8CD24BF8CF300C57472 /* ffi_x86_64.h */,
+				22C1E8CF24BF8CF300C57472 /* ffi.h */,
+				22C1E8CA24BF8CF200C57472 /* ffitarget_arm64.h */,
+				22C1E8CB24BF8CF200C57472 /* ffitarget_armv7.h */,
+				22C1E8D024BF8CF300C57472 /* ffitarget_x86_64.h */,
+				22C1E8CE24BF8CF300C57472 /* ffitarget.h */,
 				22DCD8AD24B8DB3100203A0E /* libffi.h */,
 				22DCD8AE24B8DB3100203A0E /* Info.plist */,
 			);
@@ -103,11 +168,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		22C1E8B724BF8B7600C57472 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22C1E8C024BF8B7600C57472 /* libzmq.h in Headers */,
+				22C1E8C824BF8C5500C57472 /* zmq_utils.h in Headers */,
+				22C1E8C924BF8C5600C57472 /* zmq.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22DCD89524B89C2F00203A0E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				22DCD89E24B89C2F00203A0E /* libpng.h in Headers */,
+				22C1E8DB24BF8E0300C57472 /* png.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,12 +192,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				22DCD8AF24B8DB3100203A0E /* libffi.h in Headers */,
+				22C1E8D224BF8D2400C57472 /* ffi_arm64.h in Headers */,
+				22C1E8D324BF8D2900C57472 /* ffi_armv7.h in Headers */,
+				22C1E8D924BF8D4600C57472 /* ffitarget.h in Headers */,
+				22C1E8D824BF8D4400C57472 /* ffitarget_x86_64.h in Headers */,
+				22C1E8D724BF8D4200C57472 /* ffitarget_armv7.h in Headers */,
+				22C1E8D624BF8D4000C57472 /* ffitarget_arm64.h in Headers */,
+				22C1E8D524BF8D3E00C57472 /* ffi.h in Headers */,
+				22C1E8D424BF8D3A00C57472 /* ffi_x86_64.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		22C1E8BB24BF8B7600C57472 /* libzmq */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22C1E8C324BF8B7600C57472 /* Build configuration list for PBXNativeTarget "libzmq" */;
+			buildPhases = (
+				22C1E8B724BF8B7600C57472 /* Headers */,
+				22C1E8B824BF8B7600C57472 /* Sources */,
+				22C1E8B924BF8B7600C57472 /* Frameworks */,
+				22C1E8BA24BF8B7600C57472 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libzmq;
+			productName = libzmq;
+			productReference = 22C1E8BC24BF8B7600C57472 /* libzmq.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		22DCD89924B89C2F00203A0E /* libpng */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22DCD8A124B89C2F00203A0E /* Build configuration list for PBXNativeTarget "libpng" */;
@@ -168,6 +270,9 @@
 			attributes = {
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
+					22C1E8BB24BF8B7600C57472 = {
+						CreatedOnToolsVersion = 12.0;
+					};
 					22DCD89924B89C2F00203A0E = {
 						CreatedOnToolsVersion = 12.0;
 					};
@@ -191,11 +296,19 @@
 			targets = (
 				22DCD89924B89C2F00203A0E /* libpng */,
 				22DCD8AA24B8DB3100203A0E /* libffi */,
+				22C1E8BB24BF8B7600C57472 /* libzmq */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		22C1E8BA24BF8B7600C57472 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22DCD89824B89C2F00203A0E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +365,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		22C1E8B824BF8B7600C57472 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22DCD89624B89C2F00203A0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,6 +389,64 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		22C1E8C124BF8B7600C57472 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VG8Z23C8YL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = libzmq/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-L",
+					"libzmq/builds/ios/libzmq_build/${ARCHS}/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AsheKube.libzmq;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22C1E8C224BF8B7600C57472 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VG8Z23C8YL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = libzmq/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-L",
+					"libzmq/builds/ios/libzmq_build/${ARCHS}/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AsheKube.libzmq;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		22DCD88F24B8990200203A0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -522,6 +700,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22C1E8C324BF8B7600C57472 /* Build configuration list for PBXNativeTarget "libzmq" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22C1E8C124BF8B7600C57472 /* Debug */,
+				22C1E8C224BF8B7600C57472 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		22DCD88324B8990200203A0E /* Build configuration list for PBXProject "Python-aux" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
