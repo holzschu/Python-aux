@@ -2,6 +2,16 @@
 
 Auxiliary libraries needed for Python3 compilation, precompiled (libpng, harfbuzz, freetype...). They can be useful for many other OpenSource projects on iOS, too.
 
+What we have:
+- libpng
+- libffi
+- libzmq (zeroMQ)
+
+Soon:
+- openBlas
+- freetype
+- harfbuzz
+
 ## How to use: 
 
 In your Xcode project, use the menu File -> "Swift Packages" -> "Add Package Dependency". In the window that opens, enter the address for this repository (https://github.com/holzschu/Python-aux.git). 
