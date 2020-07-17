@@ -15,7 +15,7 @@ git submodule update --init --recursive
 ./build_openblas.sh
 
 # Building harfbuzz and freetype (together):
-./build_fretype.sh
+./build_freetype.sh
 
 # then, merge frameworks into XCframeworks:
 ./create_xcframeworks.sh

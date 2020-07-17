@@ -13,11 +13,7 @@ framework=libffi
 rm -rf $framework.xcframework
 xcodebuild -create-xcframework \
 	-library $framework/build/Debug-iphoneos/libffi.a -headers $framework/build/Debug-iphoneos/include \
-	-library $framework/build/Debug-iphonesimulator/libffi.a -library $framework/build/Debug-iphonesimulator/include \
+	-library $framework/build/Debug-iphonesimulator/libffi.a -headers $framework/build/Debug-iphonesimulator/include \
 	-output $framework.xcframework
-# while we're at it, let's compute the checksum:
-rm -f $framework.xcframework.zip
-zip -rq $framework.xcframework.zip $framework.xcframework
-swift package compute-checksum $framework.xcframework.zip
 
 
