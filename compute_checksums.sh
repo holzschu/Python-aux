@@ -1,4 +1,4 @@
-for framework in libpng libffi libzmq openblas
+for framework in libpng libffi libzmq openblas freetype harfbuzz
 do
    echo $framework
    rm -f $framework.xcframework.zip
