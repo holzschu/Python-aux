@@ -13,32 +13,32 @@ let package = Package(
         .binaryTarget(
             name: "libpng",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libpng.xcframework.zip",
-            checksum: "b7a37051c20c8d19d53b7a09ffe4fca9314bf5fdcd5caea136234a92f22e2a1b"
+            checksum: "f26409ee2501d50aa9a8eba782a600714a1b50c318cb21d8eac53df36eff41c3"
         ),
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "fe21a8e374ed7b24064c7b7fef912c9eb5f177562028ed6468a635f59b02c273"
+            checksum: "2ae0a29d261a17910375d251cfd3ed73133547c5aac064e337862d876a8d0fd1"
         ),
         .binaryTarget(
             name: "libzmq",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libzmq.xcframework.zip",
-            checksum: "ccfaca176f4bc616f42f7000c67aee44fcb28a98ad8f6805c05348249da629e3"
+            checksum: "1252b600559d9721f688443564147a688b4d8713269324be7cf4ee3eea5a5efb"
         ),
         .binaryTarget(
             name: "openblas",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openblas.xcframework.zip",
-            checksum: "1e528d99b799d357e2e2ea1787a1e637d3a2944e6ccb1bba71f74e22cd0707e7"
+            checksum: "ea9d7e56329f531fd50ec47ee0959c0e3e98e46bbce99e0995e246b96a1d22ef"
         )
     ]
 )
 /*
-xcframework successfully written out to: /Users/holzschu/src/Xcode_iPad/Python-aux/libpng.xcframework
-b7a37051c20c8d19d53b7a09ffe4fca9314bf5fdcd5caea136234a92f22e2a1b
-xcframework successfully written out to: /Users/holzschu/src/Xcode_iPad/Python-aux/libffi.xcframework
-fe21a8e374ed7b24064c7b7fef912c9eb5f177562028ed6468a635f59b02c273
-xcframework successfully written out to: /Users/holzschu/src/Xcode_iPad/Python-aux/libzmq.xcframework
-ccfaca176f4bc616f42f7000c67aee44fcb28a98ad8f6805c05348249da629e3
-xcframework successfully written out to: /Users/holzschu/src/Xcode_iPad/Python-aux/openblas.xcframework
-1e528d99b799d357e2e2ea1787a1e637d3a2944e6ccb1bba71f74e22cd0707e7
+libpng
+f26409ee2501d50aa9a8eba782a600714a1b50c318cb21d8eac53df36eff41c3
+libffi
+2ae0a29d261a17910375d251cfd3ed73133547c5aac064e337862d876a8d0fd1
+libzmq
+1252b600559d9721f688443564147a688b4d8713269324be7cf4ee3eea5a5efb
+openblas
+ea9d7e56329f531fd50ec47ee0959c0e3e98e46bbce99e0995e246b96a1d22ef
 */
