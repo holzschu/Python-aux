@@ -6,9 +6,9 @@ What we have:
 - libpng
 - libffi
 - libzmq (zeroMQ)
+- openBlas
 
 Soon:
-- openBlas
 - freetype
 - harfbuzz
 
