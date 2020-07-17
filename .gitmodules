@@ -7,3 +7,6 @@
 [submodule "OpenBLAS"]
 	path = OpenBLAS
 	url = https://github.com/xianyi/OpenBLAS.git
+[submodule "harfbuzz"]
+	path = harfbuzz
+	url = https://github.com/harfbuzz/harfbuzz.git
