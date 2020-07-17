@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Python-aux",
     products: [
-        .library(name: "Python-aux", targets: ["libpng", "libffi", "libzmq", "openblas"])
+        .library(name: "Python-aux", targets: ["libpng", "libffi", "libzmq", "openblas", "freetype", "harfbuzz"])
     ],
     dependencies: [
     ],
@@ -13,32 +13,46 @@ let package = Package(
         .binaryTarget(
             name: "libpng",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libpng.xcframework.zip",
-            checksum: "f26409ee2501d50aa9a8eba782a600714a1b50c318cb21d8eac53df36eff41c3"
+            checksum: "9b66e33af4ece6a15faaaea7ecaed20da3ce4a3f2a0a87ff39813350cf461bbd"
         ),
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "2ae0a29d261a17910375d251cfd3ed73133547c5aac064e337862d876a8d0fd1"
+            checksum: "224015c11527b760d0c6a29859379bd056570c8b28a0a13742578a9f327cea7f"
         ),
         .binaryTarget(
             name: "libzmq",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libzmq.xcframework.zip",
-            checksum: "1252b600559d9721f688443564147a688b4d8713269324be7cf4ee3eea5a5efb"
+            checksum: "b80067bac79c385ae20a66e43e4b42c528c05a76e0e2e22a5307901c59fff045"
         ),
         .binaryTarget(
             name: "openblas",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openblas.xcframework.zip",
-            checksum: "ea9d7e56329f531fd50ec47ee0959c0e3e98e46bbce99e0995e246b96a1d22ef"
+            checksum: "9d508028805bc47ef6e1090f1008719770532fedeb32b785ea76e50857004149"
+        ),
+        .binaryTarget(
+            name: "freetype",
+            url: "https://github.com/holzschu/Python-aux/releases/download/1.0/freetype.xcframework.zip",
+            checksum: "73a5fb84aa215502a3a66571a1121681c3da9db576cdd61ac0e3ddb925cc2da5"
+        ),
+        .binaryTarget(
+            name: "harfbuzz",
+            url: "https://github.com/holzschu/Python-aux/releases/download/1.0/harfbuzz.xcframework.zip",
+            checksum: "625917ad0bf8e5fc64623341998cec193eb2867c2d1f6f61a12e47dc3f5bfce2"
         )
     ]
 )
 /*
 libpng
-f26409ee2501d50aa9a8eba782a600714a1b50c318cb21d8eac53df36eff41c3
+9b66e33af4ece6a15faaaea7ecaed20da3ce4a3f2a0a87ff39813350cf461bbd
 libffi
-2ae0a29d261a17910375d251cfd3ed73133547c5aac064e337862d876a8d0fd1
+224015c11527b760d0c6a29859379bd056570c8b28a0a13742578a9f327cea7f
 libzmq
-1252b600559d9721f688443564147a688b4d8713269324be7cf4ee3eea5a5efb
+b80067bac79c385ae20a66e43e4b42c528c05a76e0e2e22a5307901c59fff045
 openblas
-ea9d7e56329f531fd50ec47ee0959c0e3e98e46bbce99e0995e246b96a1d22ef
+9d508028805bc47ef6e1090f1008719770532fedeb32b785ea76e50857004149
+freetype
+73a5fb84aa215502a3a66571a1121681c3da9db576cdd61ac0e3ddb925cc2da5
+harfbuzz
+625917ad0bf8e5fc64623341998cec193eb2867c2d1f6f61a12e47dc3f5bfce2
 */
