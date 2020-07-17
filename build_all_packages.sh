@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# update libffi, OpenBLAS and libzmq source:
+# update libffi, OpenBLAS, harfbuzz and libzmq source:
 git submodule update --init --recursive
 
 # Using Xcode to create frameworks from archived libraries (lib.a) is failing randomly. 
 # We stick to creating frameworks from dynamic libraries.
+
+# building libpng:
 ./build_libpng.sh 
 
 # libffi and libzmq produce static libraries. We can still put them into xcframeworks:
