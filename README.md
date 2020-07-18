@@ -3,14 +3,12 @@
 Auxiliary libraries needed for Python3 compilation, precompiled (libpng, harfbuzz, freetype...). They can be useful for many other OpenSource projects on iOS, too.
 
 What we have:
-- libpng
-- libffi
-- libzmq (zeroMQ)
-- openBlas
-
-Soon:
-- freetype
-- harfbuzz
+- [libpng](http://www.libpng.org/pub/png/libpng.html) (1.6.37)
+- [libffi](https://github.com/libffi/libffi) (main branch)
+- [libzmq](https://github.com/zeromq/libzmq) (zeroMQ) (main branch)
+- [OpenBLAS](https://github.com/xianyi/OpenBLAS) (develop branch)
+- [freetype](https://www.freetype.org) (2.10.2)
+- [harfbuzz](https://github.com/harfbuzz/harfbuzz) (main branch)
 
 ## How to use: 
 
