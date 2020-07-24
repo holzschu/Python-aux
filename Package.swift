@@ -33,12 +33,12 @@ let package = Package(
         .binaryTarget(
             name: "freetype",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/freetype.xcframework.zip",
-            checksum: "73a5fb84aa215502a3a66571a1121681c3da9db576cdd61ac0e3ddb925cc2da5"
+            checksum: "5cfada203d02c5ca272235d1e293ea820f7e8d1a2718ec8382d42cbca91baa35"
         ),
         .binaryTarget(
             name: "harfbuzz",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/harfbuzz.xcframework.zip",
-            checksum: "625917ad0bf8e5fc64623341998cec193eb2867c2d1f6f61a12e47dc3f5bfce2"
+            checksum: "53310d1d0fb238d8c22768bb59e3717b4b70a062abb463261b1103d0f0c7e6a0"
         )
     ]
 )
@@ -52,7 +52,7 @@ b80067bac79c385ae20a66e43e4b42c528c05a76e0e2e22a5307901c59fff045
 openblas
 9d508028805bc47ef6e1090f1008719770532fedeb32b785ea76e50857004149
 freetype
-73a5fb84aa215502a3a66571a1121681c3da9db576cdd61ac0e3ddb925cc2da5
+5cfada203d02c5ca272235d1e293ea820f7e8d1a2718ec8382d42cbca91baa35
 harfbuzz
-625917ad0bf8e5fc64623341998cec193eb2867c2d1f6f61a12e47dc3f5bfce2
+53310d1d0fb238d8c22768bb59e3717b4b70a062abb463261b1103d0f0c7e6a0
 */
