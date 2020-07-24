@@ -122,10 +122,12 @@ do
 		if [ "$binary" == "freetype" ]; then
 			cp -R $freetype/include/* ${FRAMEWORK_DIR}/Headers
 			cp $freetype/build-${platform}/libfreetype.dylib ${FRAMEWORK_DIR}/$binary
+            install_name_tool -change /usr/local/lib/libharfbuzz.0.dylib  @rpath/harfbuzz.framework/harfbuzz ${FRAMEWORK_DIR}/$binary
 		fi
 		if [ "$binary" == "harfbuzz" ]; then
 			cp -R harfbuzz/src/* ${FRAMEWORK_DIR}/Headers
 			cp harfbuzz/build-${platform}/libharfbuzz.dylib ${FRAMEWORK_DIR}/$binary
+            install_name_tool -change /usr/local/lib/libfreetype.6.dylib  @rpath/freetype.framework/freetype ${FRAMEWORK_DIR}/$binary
 		fi
 		if [ "$platform" == "iphoneos" ]; then
 			cp basic_Info.plist ${FRAMEWORK_DIR}/Info.plist
