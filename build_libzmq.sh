@@ -2,7 +2,9 @@
 
 # libzmq:
 # create the static libraries
+export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
 pushd libzmq
+make distclean
 sh builds/ios/build_ios.sh
 popd
 # then, merge them into XCframeworks:

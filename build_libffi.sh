@@ -2,11 +2,12 @@
 
 # Currently, libffi and libzmq scripts produce static libraries. 
 # libffi:
+export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
 pushd libffi
 # we need to patch libffi to allow compilation with Xcode12, but only once:
 # patch -p1 < ../libffi.patch 
 xcodebuild -project libffi.xcodeproj -target libffi-iOS -sdk iphoneos -arch arm64 -configuration Debug -quiet
-xcodebuild -project libffi.xcodeproj -target libffi-iOS -sdk iphonesimulator -configuration Debug -quiet
+xcodebuild -project libffi.xcodeproj -target libffi-iOS -sdk iphonesimulator -arch x86_64 -configuration Debug -quiet
 popd 
 # then, merge them into XCframeworks:
 framework=libffi
