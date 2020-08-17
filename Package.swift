@@ -13,46 +13,46 @@ let package = Package(
         .binaryTarget(
             name: "libpng",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libpng.xcframework.zip",
-            checksum: "9b66e33af4ece6a15faaaea7ecaed20da3ce4a3f2a0a87ff39813350cf461bbd"
+            checksum: "437d7bed230d23b03093d21db3e1c21f3f08e816692801b146b80ea8a74afc30"
         ),
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "224015c11527b760d0c6a29859379bd056570c8b28a0a13742578a9f327cea7f"
+            checksum: "015624143068a9c96e83580f8449227f694e1a84f3dfd887d384c819540e4afc"
         ),
         .binaryTarget(
             name: "libzmq",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libzmq.xcframework.zip",
-            checksum: "b80067bac79c385ae20a66e43e4b42c528c05a76e0e2e22a5307901c59fff045"
+            checksum: "684bf5f46a3ff4fb6e1ec96b78ed9481319dd05653856dbae5e2f7dee5e06335"
         ),
         .binaryTarget(
             name: "openblas",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openblas.xcframework.zip",
-            checksum: "9d508028805bc47ef6e1090f1008719770532fedeb32b785ea76e50857004149"
+            checksum: "206cb90fd163494f8d68d399d36000e5a5870ebe15ec63ace4c467127b09b4bf"
         ),
         .binaryTarget(
             name: "freetype",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/freetype.xcframework.zip",
-            checksum: "5cfada203d02c5ca272235d1e293ea820f7e8d1a2718ec8382d42cbca91baa35"
+            checksum: "836e4676d4fc23b057db5c233b1ce91ab331977845b02be08d0d7de628d45b02"
         ),
         .binaryTarget(
             name: "harfbuzz",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/harfbuzz.xcframework.zip",
-            checksum: "53310d1d0fb238d8c22768bb59e3717b4b70a062abb463261b1103d0f0c7e6a0"
+            checksum: "c131861de000a79dd1c4c007962c4417d110708a067ce7b85ad5be13ca36c408"
         )
     ]
 )
 /*
 libpng
-9b66e33af4ece6a15faaaea7ecaed20da3ce4a3f2a0a87ff39813350cf461bbd
+437d7bed230d23b03093d21db3e1c21f3f08e816692801b146b80ea8a74afc30
 libffi
-224015c11527b760d0c6a29859379bd056570c8b28a0a13742578a9f327cea7f
+015624143068a9c96e83580f8449227f694e1a84f3dfd887d384c819540e4afc
 libzmq
-b80067bac79c385ae20a66e43e4b42c528c05a76e0e2e22a5307901c59fff045
+684bf5f46a3ff4fb6e1ec96b78ed9481319dd05653856dbae5e2f7dee5e06335
 openblas
-9d508028805bc47ef6e1090f1008719770532fedeb32b785ea76e50857004149
+206cb90fd163494f8d68d399d36000e5a5870ebe15ec63ace4c467127b09b4bf
 freetype
-5cfada203d02c5ca272235d1e293ea820f7e8d1a2718ec8382d42cbca91baa35
+836e4676d4fc23b057db5c233b1ce91ab331977845b02be08d0d7de628d45b02
 harfbuzz
-53310d1d0fb238d8c22768bb59e3717b4b70a062abb463261b1103d0f0c7e6a0
+c131861de000a79dd1c4c007962c4417d110708a067ce7b85ad5be13ca36c408
 */
