@@ -18,7 +18,7 @@ let package = Package(
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "7f3dafd8d6f96e6f2fcce03621de96a950cdf7f63c63bdbc68f37474edbbcece"
+            checksum: "9ed689d36a3b2fd005090ef5e1550fbe76e532bb93cd5899ed61d356ac9bd32c"
         ),
         .binaryTarget(
             name: "libzmq",
