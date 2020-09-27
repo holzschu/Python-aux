@@ -23,7 +23,7 @@ let package = Package(
         .binaryTarget(
             name: "libzmq",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libzmq.xcframework.zip",
-            checksum: "f39faf8387951e77cf4c4a7e430a479055e6cf88638777e968679f996829b0f4"
+            checksum: "a72acd151de85c831c0df5826d8f671be49866bed8c9464332c16ba4c5989ec2"
         ),
         .binaryTarget(
             name: "openblas",
