@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Required with Xcode 12 beta:
-export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
+# In case we use Xcode-beta, use the proper m4:
+export M4=$(xcrun -f m4)
 OSX_SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 IOS_SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)

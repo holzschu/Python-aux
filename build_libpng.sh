@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Required with Xcode 12 beta:
-export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
+export M4=$(xcrun -f m4)
 OSX_SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 IOS_SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
@@ -9,7 +9,7 @@ SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
 curl -OL https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz
 tar xzf libpng-1.6.37.tar.gz
 rm libpng-1.6.37.tar.gz
-export DYLD_ROOT_PATH\=/Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
+export DYLD_ROOT_PATH\=$(xcrun --sdk iphonesimulator --show-sdk-path)
 
 # libpng
 pushd libpng-1.6.37

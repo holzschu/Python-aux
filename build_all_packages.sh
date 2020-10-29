@@ -19,6 +19,9 @@ git submodule update --init --recursive
 # Building harfbuzz and freetype (together):
 ./build_freetype.sh
 
+# Building libjpeg:
+./build_libjpg.sh
+
 # then, merge frameworks into XCframeworks:
 ./create_xcframeworks.sh
 # and compute checksums:

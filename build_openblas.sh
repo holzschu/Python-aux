@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Required with Xcode 12 beta:
-export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
+export M4=$(xcrun -f m4)
 OSX_SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 IOS_SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
@@ -17,12 +17,12 @@ pushd OpenBLAS
  	 CC="clang" \
  	 CFLAGS="-miphoneos-version-min=11.0 -isysroot ${IOS_SDKROOT} -arch arm64 -fembed-bitcode" \
  	 NOFORTRAN=1 \
- 	 AR="/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar" clean
+ 	 AR="$(xcrun -f ar)" clean
  make TARGET=ARMV8 BINARY=64 HOSTCC="clang -isysroot ${OSX_SDKROOT}" \
  	 CC="clang" \
  	 CFLAGS="-miphoneos-version-min=11.0 -isysroot  ${IOS_SDKROOT} -arch arm64 -fembed-bitcode" \
  	 NOFORTRAN=1 \
- 	 AR="/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar" libs shared
+ 	 AR="$(xcrun -f ar)" libs shared
  mkdir -p build-iphoneos
  cp libopenblas_armv8p-r0.3.10.dev.a build-iphoneos/libopenblas.a
  cp libopenblas_armv8p-r0.3.10.dev.dylib build-iphoneos/libopenblas.dylib

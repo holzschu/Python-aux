@@ -2,7 +2,7 @@
 
 # Currently, libffi and libzmq scripts produce static libraries. 
 # libffi:
-export M4=/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin//m4
+export M4=$(xcrun -f m4)
 pushd libffi
 # we need to patch libffi to allow compilation with Xcode12, but only once:
 # patch -p1 < ../libffi.patch 
