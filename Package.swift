@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Python-aux",
     products: [
-        .library(name: "Python-aux", targets: ["libpng", "libffi", "libzmq", "openblas", "freetype", "harfbuzz", "crypto", "openssl", "libjpeg", "libtiff"])
+        .library(name: "Python-aux", targets: ["libpng", "libffi", "libzmq", "openblas", "freetype", "harfbuzz", "crypto", "openssl", "libjpeg", "libtiff", "libxlst", "libexslt"])
     ],
     dependencies: [
     ],
@@ -49,16 +49,26 @@ let package = Package(
             name: "openssl",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openssl.xcframework.zip",
             checksum: "60b0800525210424d923ce3adb86132ee04f339b700ed36c5ade4ce73f0f352c"
-        )
+        ),
         .binaryTarget(
             name: "libjpeg",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libjpeg.xcframework.zip",
             checksum: "e46377519bd452f76ee9b0a6bec3a1864164a62f564ffbf5a1664d9b47c59961"
-        )
+        ),
         .binaryTarget(
             name: "libtiff",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libtiff.xcframework.zip",
             checksum: "de376bdc679f4725df5147bf0291458d1fc4e26d4b4e4e953be1daaaef2cf128"
+        ),
+        .binaryTarget(
+            name: "libxslt",
+            url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libxslt.xcframework.zip",
+            checksum: "48435e3174fff3fd0c26cf9350c6b6c51b7f351bc4af51568b75f8a19bda86c9"
+        ),
+        .binaryTarget(
+            name: "libexslt",
+            url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libexslt.xcframework.zip",
+            checksum: "2570d04ad57d0732455b26ae43c63945e80bf96ccd99c0ea07165978285fd9a9"
         )
     ]
 )
@@ -83,5 +93,8 @@ libjpeg
 e46377519bd452f76ee9b0a6bec3a1864164a62f564ffbf5a1664d9b47c59961
 libtiff
 de376bdc679f4725df5147bf0291458d1fc4e26d4b4e4e953be1daaaef2cf128
-
+libxslt
+48435e3174fff3fd0c26cf9350c6b6c51b7f351bc4af51568b75f8a19bda86c9
+libexslt
+2570d04ad57d0732455b26ae43c63945e80bf96ccd99c0ea07165978285fd9a9
 */

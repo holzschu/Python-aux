@@ -1,4 +1,4 @@
-for framework in libpng libffi libzmq openblas freetype harfbuzz crypto openssl libjpeg libtiff
+for framework in libpng libffi libzmq openblas freetype harfbuzz crypto openssl libjpeg libtiff libxslt libexslt
 do
    echo $framework
    rm -f $framework.xcframework.zip
