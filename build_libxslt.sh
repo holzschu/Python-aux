@@ -25,8 +25,8 @@ mkdir -p build-iphoneos/libxslt/include/libxslt/
 mkdir -p build-iphoneos/libexslt/include/libexslt/
 cp libxslt/.libs/libxslt.a build-iphoneos
 cp libexslt/.libs/libexslt.a build-iphoneos
-cp libxslt/*.h build-iphoneos/include/libxslt/
-cp libexslt/*.h build-iphoneos/include/libexslt/
+cp libxslt/*.h build-iphoneos/libxslt/include/libxslt/
+cp libexslt/*.h build-iphoneos/libexslt/include/libexslt/
 
 make distclean
 sh ./configure CC=clang CXX=clang++ \
@@ -44,8 +44,8 @@ mkdir -p build-iphonesimulator/libxslt/include/libxslt/
 mkdir -p build-iphonesimulator/libexslt/include/libexslt/
 cp libxslt/.libs/libxslt.a build-iphonesimulator
 cp libexslt/.libs/libexslt.a build-iphonesimulator
-cp libxslt/*.h build-iphonesimulator/include/libxslt/
-cp libexslt/*.h build-iphonesimulator/include/libexslt/
+cp libxslt/*.h build-iphonesimulator/libxslt/include/libxslt/
+cp libexslt/*.h build-iphonesimulator/libexslt/include/libexslt/
 popd
 
 # then, merge them into XCframeworks:

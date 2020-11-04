@@ -63,12 +63,12 @@ let package = Package(
         .binaryTarget(
             name: "libxslt",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libxslt.xcframework.zip",
-            checksum: "48435e3174fff3fd0c26cf9350c6b6c51b7f351bc4af51568b75f8a19bda86c9"
+            checksum: "6c659202d6514bdbc88e3085d9a7873c2f990c0aa5ac99ca626b0fa4ed42dc1d"
         ),
         .binaryTarget(
             name: "libexslt",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libexslt.xcframework.zip",
-            checksum: "2570d04ad57d0732455b26ae43c63945e80bf96ccd99c0ea07165978285fd9a9"
+            checksum: "765012ae2990c22d708a631a1a4c59ea45bdca89e63d14af7540c3c478998566"
         )
     ]
 )
