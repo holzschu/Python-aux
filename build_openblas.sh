@@ -40,6 +40,18 @@ pushd OpenBLAS
  cp libopenblas_haswellp-r0.3.10.dev.dylib build-iphonesimulator/libopenblas.dylib
 # for the headers:
  make BINARY=64 HOSTCC="clang -isysroot ${OSX_SDKROOT}" CC="clang" CFLAGS="-mios-simulator-version-min=11.0 -isysroot ${SIM_SDKROOT} -arch x86_64 -fembed-bitcode" NOFORTRAN=1 install PREFIX=./install
+# OSX: 
+make BINARY=64 HOSTCC="clang -isysroot ${OSX_SDKROOT}" \
+	CC="clang" CFLAGS="-isysroot${OSX_SDKROOT} -fembed-bitcode" \
+	NOFORTRAN=1 \
+	AR="$(xcrun -f ar)" clean
+make BINARY=64 HOSTCC="clang -isysroot ${OSX_SDKROOT}" \
+	CC="clang" CFLAGS="-isysroot${OSX_SDKROOT} -fembed-bitcode" \
+	NOFORTRAN=1 \
+	AR="$(xcrun -f ar)" libs shared
+  mkdir -p build-osx
+ cp libopenblas_skylakexp-r0.3.10.dev.a build-osx/libopenblas.a
+ cp libopenblas_skylakexp-r0.3.10.dev.dylib build-osx/libopenblas.dylib
 popd
 
 binary=openblas
@@ -66,4 +78,17 @@ plutil -replace CFBundleExecutable -string $binary ${FRAMEWORK_DIR}/Info.plist
 plutil -replace CFBundleName -string $binary ${FRAMEWORK_DIR}/Info.plist
 plutil -replace CFBundleIdentifier -string Nicolas-Holzschuch.$binary  ${FRAMEWORK_DIR}/Info.plist
 install_name_tool -id @rpath/$binary.framework/$binary   ${FRAMEWORK_DIR}/$binary
+
+FRAMEWORK_DIR=build/Release-osx/$binary.framework
+rm -rf ${FRAMEWORK_DIR}
+mkdir -p ${FRAMEWORK_DIR}
+mkdir -p ${FRAMEWORK_DIR}/Headers
+cp OpenBLAS/install/include/*.h ${FRAMEWORK_DIR}/Headers
+cp OpenBLAS/build-osx/libopenblas.dylib ${FRAMEWORK_DIR}/$binary
+cp basic_Info_Simulator.plist ${FRAMEWORK_DIR}/Info.plist
+plutil -replace CFBundleExecutable -string $binary ${FRAMEWORK_DIR}/Info.plist
+plutil -replace CFBundleName -string $binary ${FRAMEWORK_DIR}/Info.plist
+plutil -replace CFBundleIdentifier -string Nicolas-Holzschuch.$binary  ${FRAMEWORK_DIR}/Info.plist
+install_name_tool -id @rpath/$binary.framework/$binary   ${FRAMEWORK_DIR}/$binary
+
 

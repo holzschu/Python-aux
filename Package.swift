@@ -13,32 +13,32 @@ let package = Package(
         .binaryTarget(
             name: "libpng",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libpng.xcframework.zip",
-            checksum: "f18d6bf17ccd5408a80fc79f0d50a5438853883e672d85503d936100639e23bd"
+            checksum: "df9d3a7c089c4f31fb2b2b2f90e4dd36e398e363355076487c885347d3aae81a"
         ),
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "dd038a7da4249750bde7dcb223502a7e39474c4cc743ecb928964f7b995b2164"
+            checksum: "e039089e4ccbeaff15563f0f4c07805378ce56dd505b4ff413c9034bcb77133d"
         ),
         .binaryTarget(
             name: "libzmq",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libzmq.xcframework.zip",
-            checksum: "fff8b579109df6c821e7d62e38f137d65fb9b51e5a310fecd01cd94574c66013"
+            checksum: "27e23b418ec7ddfce1168cd245e3969e4320f05473441a99a1a2a4f7d16abe64"
         ),
         .binaryTarget(
             name: "openblas",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openblas.xcframework.zip",
-            checksum: "e7e433b23388923f03ba6ba8543617c1d8f15b2576e5090783beccd77bcf23cf"
+            checksum: "710471628739252df73dc4e33d536ef79e82401cb2ae43c4a047c361d89524ea"
         ),
         .binaryTarget(
             name: "freetype",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/freetype.xcframework.zip",
-            checksum: "4f0cd2a6c4e336e3db1c899600165d4e6ba5c7be1fc09d03bc23be18bfac7959"
+            checksum: "fcbad9bbd74d8aa54ae406786a0f3ba9c4e10268e4f585a70f732eaae87d25fb"
         ),
         .binaryTarget(
             name: "harfbuzz",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/harfbuzz.xcframework.zip",
-            checksum: "e20e7ad3814bf2996e196fc296fc364d70ef496dbc7810e5b2e65c2d77010e25"
+            checksum: "a304ff6e9fc7b1597533fb9216e970ea01315da51dbbfdeb74748c4f465dd90d"
         ),
         .binaryTarget(
             name: "crypto",
@@ -53,7 +53,7 @@ let package = Package(
         .binaryTarget(
             name: "libjpeg",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libjpeg.xcframework.zip",
-            checksum: "e46377519bd452f76ee9b0a6bec3a1864164a62f564ffbf5a1664d9b47c59961"
+            checksum: "d9ed6a75628ef7f06b14d69bea000ded4b975a2abf52b4232f32dc899af14f2b"
         ),
         .binaryTarget(
             name: "libtiff",
@@ -63,12 +63,12 @@ let package = Package(
         .binaryTarget(
             name: "libxslt",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libxslt.xcframework.zip",
-            checksum: "6c659202d6514bdbc88e3085d9a7873c2f990c0aa5ac99ca626b0fa4ed42dc1d"
+            checksum: "b389d2d21210ae48aafe598a20d550989746332be77fad67b6c6247668da35ce"
         ),
         .binaryTarget(
             name: "libexslt",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libexslt.xcframework.zip",
-            checksum: "765012ae2990c22d708a631a1a4c59ea45bdca89e63d14af7540c3c478998566"
+            checksum: "b0f427c42922e4a8caeaf5b8c7fa1208622140023f22d1aaaffc996c013f6e09"
         )
     ]
 )

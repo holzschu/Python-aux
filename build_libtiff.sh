@@ -23,7 +23,7 @@ make -j4 --quiet
 mkdir -p build-iphoneos
 mkdir -p build-iphoneos/include
 cp libtiff/.libs/libtiff.a build-iphoneos
-cp libtiff/tiff.h libtiff/tiffio.h libtiff/tiffvers.h libtiff/tiffio.hxx build-iphoneos/include
+cp libtiff/tiff.h libtiff/tiffio.h libtiff/tiffvers.h libtiff/tiffio.hxx libtiff/tiffconf.h build-iphoneos/include
 
 make distclean
 ./configure CC=clang CXX=clang++ \
@@ -35,7 +35,7 @@ make -j4 --quiet
 mkdir -p build-iphonesimulator
 mkdir -p build-iphonesimulator/include
 cp libtiff/.libs/libtiff.a build-iphonesimulator
-cp libtiff/tiff.h libtiff/tiffio.h libtiff/tiffvers.h libtiff/tiffio.hxx build-iphonesimulator/include
+cp libtiff/tiff.h libtiff/tiffio.h libtiff/tiffvers.h libtiff/tiffio.hxx libtiff/tiffconf.h build-iphonesimulator/include
 popd
 
 # then, merge them into XCframeworks:

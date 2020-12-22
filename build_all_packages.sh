@@ -22,9 +22,15 @@ git submodule update --init --recursive
 # Building libjpeg:
 ./build_libjpg.sh
 
+# XSLT/EXSLT
+./build_libxslt.sh
+
+# OpenSSL: 
+./build_openssl.sh
+
 # then, merge frameworks into XCframeworks:
 ./create_xcframeworks.sh
 # and compute checksums:
 ./compute_checksums.sh
 
-# freetype, harfbuzz
+# crypto openssl libjpeg libtiff libxslt libexslt 

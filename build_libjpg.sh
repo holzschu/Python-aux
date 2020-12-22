@@ -23,7 +23,7 @@ make -j4 --quiet
 mkdir -p build-iphoneos
 mkdir -p build-iphoneos/include
 cp .libs/libjpeg.a build-iphoneos
-cp jerror.h jmorecfg.h jpeglib.h build-iphoneos/include
+cp j*.h build-iphoneos/include
 
 make distclean
 ./configure CC=clang CXX=clang++ \
@@ -35,7 +35,7 @@ make -j4 --quiet
 mkdir -p build-iphonesimulator
 mkdir -p build-iphonesimulator/include
 cp .libs/libjpeg.a build-iphonesimulator
-cp jerror.h jmorecfg.h jpeglib.h build-iphonesimulator/include
+cp j*.h build-iphonesimulator/include
 
 # Library is now in: .libs/libjpeg.a. Create xcframework:
 popd
