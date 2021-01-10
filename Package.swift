@@ -13,32 +13,32 @@ let package = Package(
         .binaryTarget(
             name: "libpng",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libpng.xcframework.zip",
-            checksum: "df9d3a7c089c4f31fb2b2b2f90e4dd36e398e363355076487c885347d3aae81a"
+            checksum: "79eaa6aef840439bc276e19be6ffe2595b70e8e83f83a9dafc7517d59d6b4898"
         ),
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "e039089e4ccbeaff15563f0f4c07805378ce56dd505b4ff413c9034bcb77133d"
+            checksum: "429646b10fb9f8e6f821759a8d3535750cf89eb1363369010331da63667e2c5d"
         ),
         .binaryTarget(
             name: "libzmq",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libzmq.xcframework.zip",
-            checksum: "27e23b418ec7ddfce1168cd245e3969e4320f05473441a99a1a2a4f7d16abe64"
+            checksum: "3f18b13b060a45194940dda748c3eb9e5dab57f929555c948fa2181022c2a7ae"
         ),
         .binaryTarget(
             name: "openblas",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openblas.xcframework.zip",
-            checksum: "710471628739252df73dc4e33d536ef79e82401cb2ae43c4a047c361d89524ea"
+            checksum: "f498a5696768e3ca2a978eb881d7012c54dc888ba40cae6505e2dd22cd10fb84"
         ),
         .binaryTarget(
             name: "freetype",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/freetype.xcframework.zip",
-            checksum: "fcbad9bbd74d8aa54ae406786a0f3ba9c4e10268e4f585a70f732eaae87d25fb"
+            checksum: "14903ffb1fd1c66e6fc603e9ac963b2d08fb774db5999a758bad6b133e66d6e1"
         ),
         .binaryTarget(
             name: "harfbuzz",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/harfbuzz.xcframework.zip",
-            checksum: "a304ff6e9fc7b1597533fb9216e970ea01315da51dbbfdeb74748c4f465dd90d"
+            checksum: "59ff0a796327cfca64ae76ba6688d18928c8bd5746456d7e417be5ef2433f11b"
         ),
         .binaryTarget(
             name: "crypto",
@@ -53,12 +53,12 @@ let package = Package(
         .binaryTarget(
             name: "libjpeg",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libjpeg.xcframework.zip",
-            checksum: "d9ed6a75628ef7f06b14d69bea000ded4b975a2abf52b4232f32dc899af14f2b"
+            checksum: "6c7c73b1c64e9e2d7e968676afff141a5ae93dec8ba9e4e90294a7020a53de71"
         ),
         .binaryTarget(
             name: "libtiff",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libtiff.xcframework.zip",
-            checksum: "de376bdc679f4725df5147bf0291458d1fc4e26d4b4e4e953be1daaaef2cf128"
+            checksum: "923e06e9f3043460679e1eb5d24b33afbedfff1b860b9754616ef19a1c79b768"
         ),
         .binaryTarget(
             name: "libxslt",
@@ -74,27 +74,27 @@ let package = Package(
 )
 /*
 libpng
-f18d6bf17ccd5408a80fc79f0d50a5438853883e672d85503d936100639e23bd
+79eaa6aef840439bc276e19be6ffe2595b70e8e83f83a9dafc7517d59d6b4898
 libffi
-dd038a7da4249750bde7dcb223502a7e39474c4cc743ecb928964f7b995b2164
+429646b10fb9f8e6f821759a8d3535750cf89eb1363369010331da63667e2c5d
 libzmq
-fff8b579109df6c821e7d62e38f137d65fb9b51e5a310fecd01cd94574c66013
+3f18b13b060a45194940dda748c3eb9e5dab57f929555c948fa2181022c2a7ae
 openblas
-e7e433b23388923f03ba6ba8543617c1d8f15b2576e5090783beccd77bcf23cf
+f498a5696768e3ca2a978eb881d7012c54dc888ba40cae6505e2dd22cd10fb84
 freetype
-4f0cd2a6c4e336e3db1c899600165d4e6ba5c7be1fc09d03bc23be18bfac7959
+14903ffb1fd1c66e6fc603e9ac963b2d08fb774db5999a758bad6b133e66d6e1
 harfbuzz
-e20e7ad3814bf2996e196fc296fc364d70ef496dbc7810e5b2e65c2d77010e25
+59ff0a796327cfca64ae76ba6688d18928c8bd5746456d7e417be5ef2433f11b
 crypto
 d4003706407aefabfa28861f18de2ecc830a588891bf640083a528ad719fbccd
 openssl
 60b0800525210424d923ce3adb86132ee04f339b700ed36c5ade4ce73f0f352c
 libjpeg
-e46377519bd452f76ee9b0a6bec3a1864164a62f564ffbf5a1664d9b47c59961
+6c7c73b1c64e9e2d7e968676afff141a5ae93dec8ba9e4e90294a7020a53de71
 libtiff
-de376bdc679f4725df5147bf0291458d1fc4e26d4b4e4e953be1daaaef2cf128
+923e06e9f3043460679e1eb5d24b33afbedfff1b860b9754616ef19a1c79b768
 libxslt
-48435e3174fff3fd0c26cf9350c6b6c51b7f351bc4af51568b75f8a19bda86c9
+b389d2d21210ae48aafe598a20d550989746332be77fad67b6c6247668da35ce
 libexslt
-2570d04ad57d0732455b26ae43c63945e80bf96ccd99c0ea07165978285fd9a9
+b0f427c42922e4a8caeaf5b8c7fa1208622140023f22d1aaaffc996c013f6e09
 */
