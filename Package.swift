@@ -43,12 +43,12 @@ let package = Package(
         .binaryTarget(
             name: "crypto",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/crypto.xcframework.zip",
-            checksum: "d4003706407aefabfa28861f18de2ecc830a588891bf640083a528ad719fbccd"
+            checksum: "dd7ca09ab7cfa9c3a15022887da0cc869019131ec8771c10668b3ace1ad0aec3"
         ),
         .binaryTarget(
             name: "openssl",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openssl.xcframework.zip",
-            checksum: "60b0800525210424d923ce3adb86132ee04f339b700ed36c5ade4ce73f0f352c"
+            checksum: "298b478b8d446b5beca8b0d8ce80e0d9b90e91fe2b1602dd5b3968453cd56380"
         ),
         .binaryTarget(
             name: "libjpeg",

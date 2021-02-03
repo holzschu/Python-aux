@@ -22,7 +22,7 @@ fi
 pushd OpenBLAS
 # Having the exact same script inside Xcode does not work. Strange but true.
 # iphoneos:
-if [$USE_FORTRAN == 0];
+if [ $USE_FORTRAN == 0 ];
 then
 	make TARGET=ARMV8 BINARY=64 \
 		HOSTCC="clang -isysroot ${OSX_SDKROOT}" \
@@ -49,6 +49,8 @@ else
 		FFLAGS="-miphoneos-version-min=11.0 -arch arm64" \
 		ASFLAGS="-miphoneos-version-min=11.0 -arch arm64" \
 		AR="$(xcrun -f ar)"  all
+    # gemm_tcopy.S and gemm_ncopy.S both create issues. Commented out in Kernel.ARMV8.
+	# What if you don't give a target? (no assembly code, obviously).
     # make has created the libopenblas....dylib with no platform. Let's do it:
 	pushd exports
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ -dynamic -dylib -arch arm64 -dylib_install_name /Users/holzschu/src/Xcode_iPad/Python-aux/OpenBLAS/exports/../libopenblas.0.dylib -all_load -headerpad_max_install_names -weak_reference_mismatches non-weak -o ../libopenblas_armv8p-r0.3.13.dev.dylib -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1 -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1/../../../../aarch64-apple-darwin20/lib -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1 -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1/../../../../aarch64-apple-darwin20/lib -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1 -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1/../../../../aarch64-apple-darwin20/lib ../libopenblas_armv8p-r0.3.13.dev.a -exported_symbols_list osx.def -lSystem -lgfortran -lemutls_w -lemutls_w -lSystem -lgfortran -lemutls_w -lemutls_w -lSystem -lgfortran -lemutls_w -lgcc -lm -lemutls_w -lgcc -lSystem -lgcc -platform_version ios 11.0 11.0
@@ -72,7 +74,7 @@ fi
  cp libopenblas_haswellp-r0.3.13.dev.a build-iphonesimulator/libopenblas.a
  cp libopenblas_haswellp-r0.3.13.dev.dylib build-iphonesimulator/libopenblas.dylib
 # OSX: 
-if [$USE_FORTRAN == 0];
+if [ $USE_FORTRAN == 0 ];
 then
 	make BINARY=64 HOSTCC="clang -isysroot ${OSX_SDKROOT}" \
 		CC="clang" CFLAGS="-isysroot${OSX_SDKROOT} -fembed-bitcode" \
