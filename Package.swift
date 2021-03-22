@@ -13,88 +13,88 @@ let package = Package(
         .binaryTarget(
             name: "libpng",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libpng.xcframework.zip",
-            checksum: "79eaa6aef840439bc276e19be6ffe2595b70e8e83f83a9dafc7517d59d6b4898"
+            checksum: "0044ad2af5269f35fcbd9bd1690ed98f32a8fb06ee6ab2b508d74da87e7bd32d"
         ),
         .binaryTarget(
             name: "libffi",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libffi.xcframework.zip",
-            checksum: "429646b10fb9f8e6f821759a8d3535750cf89eb1363369010331da63667e2c5d"
+            checksum: "f3f39a73e7268e3a17e61db4d95c44cb9b08d8f1f95ec5ea9447ad6f3d058602"
         ),
         .binaryTarget(
             name: "libzmq",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libzmq.xcframework.zip",
-            checksum: "3f18b13b060a45194940dda748c3eb9e5dab57f929555c948fa2181022c2a7ae"
+            checksum: "d2882a48cab72e96883b8e3c09af7bc115d16cd2d5c97136880e950a69e760d5"
         ),
         .binaryTarget(
             name: "openblas",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openblas.xcframework.zip",
-            checksum: "f498a5696768e3ca2a978eb881d7012c54dc888ba40cae6505e2dd22cd10fb84"
+            checksum: "4b79372492f21cb43e58c1c0b2624e846a81177b94ac0c12072bfce1c80ae3fa"
         ),
         .binaryTarget(
             name: "freetype",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/freetype.xcframework.zip",
-            checksum: "14903ffb1fd1c66e6fc603e9ac963b2d08fb774db5999a758bad6b133e66d6e1"
+            checksum: "640290f398b0414d7592ac34de06e8e01e4ae094bca10b0a3a8ef63cb8c7f8b6"
         ),
         .binaryTarget(
             name: "harfbuzz",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/harfbuzz.xcframework.zip",
-            checksum: "59ff0a796327cfca64ae76ba6688d18928c8bd5746456d7e417be5ef2433f11b"
+            checksum: "3a5730868725dfbb77142e016291ff112878198a4a6171e70a005d594e55a3c4"
         ),
         .binaryTarget(
             name: "crypto",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/crypto.xcframework.zip",
-            checksum: "dd7ca09ab7cfa9c3a15022887da0cc869019131ec8771c10668b3ace1ad0aec3"
+            checksum: "26682e31ab3bdad7bfb02236dafdd06409c3fd4fa9ef8ec2b404180d2c3c82c4"
         ),
         .binaryTarget(
             name: "openssl",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/openssl.xcframework.zip",
-            checksum: "298b478b8d446b5beca8b0d8ce80e0d9b90e91fe2b1602dd5b3968453cd56380"
+            checksum: "dda71e88ac9a1f02a44d5a7918ca5a14998653bed2d21a2a2874040861dc680c"
         ),
         .binaryTarget(
             name: "libjpeg",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libjpeg.xcframework.zip",
-            checksum: "6c7c73b1c64e9e2d7e968676afff141a5ae93dec8ba9e4e90294a7020a53de71"
+            checksum: "aeaaf1e14a1c5ea9b312fe8ade12d8d9d80d23f0e329cb407c53c4e16511b8f5"
         ),
         .binaryTarget(
             name: "libtiff",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libtiff.xcframework.zip",
-            checksum: "923e06e9f3043460679e1eb5d24b33afbedfff1b860b9754616ef19a1c79b768"
+            checksum: "c6a7612437f3ab1450dfaa3b06af3db193d6d6cba95fe5130a792c44d21e21a4"
         ),
         .binaryTarget(
             name: "libxslt",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libxslt.xcframework.zip",
-            checksum: "b389d2d21210ae48aafe598a20d550989746332be77fad67b6c6247668da35ce"
+            checksum: "1c7e513edcc5c9a3a7dedfaaef966c851c7862cf854b3bd7185515412244d66d"
         ),
         .binaryTarget(
             name: "libexslt",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libexslt.xcframework.zip",
-            checksum: "b0f427c42922e4a8caeaf5b8c7fa1208622140023f22d1aaaffc996c013f6e09"
+            checksum: "c4fc441665de546dde80d6e25b02d96f51a39c7ad4263376f6d37900cb947889"
         )
     ]
 )
 /*
 libpng
-79eaa6aef840439bc276e19be6ffe2595b70e8e83f83a9dafc7517d59d6b4898
+0044ad2af5269f35fcbd9bd1690ed98f32a8fb06ee6ab2b508d74da87e7bd32d
 libffi
-429646b10fb9f8e6f821759a8d3535750cf89eb1363369010331da63667e2c5d
+f3f39a73e7268e3a17e61db4d95c44cb9b08d8f1f95ec5ea9447ad6f3d058602
 libzmq
-3f18b13b060a45194940dda748c3eb9e5dab57f929555c948fa2181022c2a7ae
+d2882a48cab72e96883b8e3c09af7bc115d16cd2d5c97136880e950a69e760d5
 openblas
-f498a5696768e3ca2a978eb881d7012c54dc888ba40cae6505e2dd22cd10fb84
+4b79372492f21cb43e58c1c0b2624e846a81177b94ac0c12072bfce1c80ae3fa
 freetype
-14903ffb1fd1c66e6fc603e9ac963b2d08fb774db5999a758bad6b133e66d6e1
+640290f398b0414d7592ac34de06e8e01e4ae094bca10b0a3a8ef63cb8c7f8b6
 harfbuzz
-59ff0a796327cfca64ae76ba6688d18928c8bd5746456d7e417be5ef2433f11b
+3a5730868725dfbb77142e016291ff112878198a4a6171e70a005d594e55a3c4
 crypto
-d4003706407aefabfa28861f18de2ecc830a588891bf640083a528ad719fbccd
+26682e31ab3bdad7bfb02236dafdd06409c3fd4fa9ef8ec2b404180d2c3c82c4
 openssl
-60b0800525210424d923ce3adb86132ee04f339b700ed36c5ade4ce73f0f352c
+dda71e88ac9a1f02a44d5a7918ca5a14998653bed2d21a2a2874040861dc680c
 libjpeg
-6c7c73b1c64e9e2d7e968676afff141a5ae93dec8ba9e4e90294a7020a53de71
+aeaaf1e14a1c5ea9b312fe8ade12d8d9d80d23f0e329cb407c53c4e16511b8f5
 libtiff
-923e06e9f3043460679e1eb5d24b33afbedfff1b860b9754616ef19a1c79b768
+c6a7612437f3ab1450dfaa3b06af3db193d6d6cba95fe5130a792c44d21e21a4
 libxslt
-b389d2d21210ae48aafe598a20d550989746332be77fad67b6c6247668da35ce
+1c7e513edcc5c9a3a7dedfaaef966c851c7862cf854b3bd7185515412244d66d
 libexslt
-b0f427c42922e4a8caeaf5b8c7fa1208622140023f22d1aaaffc996c013f6e09
+c4fc441665de546dde80d6e25b02d96f51a39c7ad4263376f6d37900cb947889
 */
