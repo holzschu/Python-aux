@@ -21,3 +21,7 @@ In the rightmost column, you will see "Swift Package Dependencies", and under it
 In this repository, run `build_all_packages.sh`. This will update the code, compile the packages, create the frameworks, create and compress the xcframeworks and output the hash sums.
 
 For use in your own repository, update the hash sums in `Package.swift`, publish the xcframeworks.zip in the right place and enjoy.
+
+## Work in progress: 
+
+- libheif: needs libpng (OK), libde265 and libx265 (WIP): https://github.com/strukturag/libde265

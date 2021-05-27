@@ -12,6 +12,12 @@ USE_FORTRAN=0
 if [ -e "/usr/local/aarch64-apple-darwin20/lib/libgfortran.dylib" ];then
 	USE_FORTRAN=1
 fi
+# OSX 11: required for many things
+if [ -z "${LIBRARY_PATH}" ]; then
+	export LIBRARY_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
+else
+	export LIBRARY_PATH="$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
+fi
 
 # Using Xcode to create frameworks from archived libraries (lib.a) is failing randomly. 
 # We stick to creating frameworks from dynamic libraries.
@@ -49,7 +55,8 @@ else
 		FFLAGS="-miphoneos-version-min=11.0 -arch arm64" \
 		ASFLAGS="-miphoneos-version-min=11.0 -arch arm64" \
 		AR="$(xcrun -f ar)"  all
-    # gemm_tcopy.S and gemm_ncopy.S both create issues. Commented out in Kernel.ARMV8.
+    # gemm_tcopy.S and gemm_ncopy.S both create issues. Commented out in KERNEL.ARMV8.
+	# same with sgemm_tcopy (scikit-learn) and presumably sgemm_ncopy. Commented out.
 	# What if you don't give a target? (no assembly code, obviously).
     # make has created the libopenblas....dylib with no platform. Let's do it:
 	pushd exports
