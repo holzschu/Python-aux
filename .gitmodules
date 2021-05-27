@@ -13,3 +13,6 @@
 [submodule "libxslt"]
 	path = libxslt
 	url = https://gitlab.gnome.org/GNOME/libxslt.git
+[submodule "libheif"]
+	path = libheif
+	url = https://github.com/strukturag/libheif.git
