@@ -16,3 +16,6 @@
 [submodule "libheif"]
 	path = libheif
 	url = https://github.com/strukturag/libheif.git
+[submodule "geos"]
+	path = geos
+	url = https://git.osgeo.org/gitea/geos/geos.git
