@@ -6,7 +6,7 @@ do
 done
 
 # 3 architectures framework
-for framework in openblas libgeos libgeos_c libproj
+for framework in openblas libgeos libgeos_c libproj libgdal libspatialindex libspatialindex_c
 do
    rm -rf $framework.xcframework
    xcodebuild -create-xcframework -framework build/Release-iphoneos/$framework.framework -framework build/Release-iphonesimulator/$framework.framework -framework build/Release-osx/$framework.framework -output $framework.xcframework

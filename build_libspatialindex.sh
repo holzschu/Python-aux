@@ -6,12 +6,9 @@ OSX_SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 IOS_SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
 
-mkdir -p geos-osx
-pushd geos-osx
-cmake ../geos -DGEOS_ENABLE_TESTS=OFF \
-	-DGEOS_ENABLE_INLINE=OFF \
-	-DGEOS_ENABLE_MACOSX_FRAMEWORK=ON \
-	-DGEOS_ENABLE_MACOSX_FRAMEWORK_UNIXCOMPAT=ON \
+mkdir -p libspatialindex-osx
+pushd libspatialindex-osx
+cmake ../libspatialindex \
 	-DCMAKE_INSTALL_PREFIX=@rpath \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_OSX_SYSROOT=${OSX_SDKROOT} \
@@ -22,12 +19,9 @@ cmake ../geos -DGEOS_ENABLE_TESTS=OFF \
 make
 popd
 
-mkdir -p geos-iphoneos
-pushd geos-iphoneos
-cmake ../geos -DGEOS_ENABLE_TESTS=OFF \
-	-DGEOS_ENABLE_INLINE=OFF \
-	-DGEOS_ENABLE_MACOSX_FRAMEWORK=ON \
-	-DGEOS_ENABLE_MACOSX_FRAMEWORK_UNIXCOMPAT=ON \
+mkdir -p libspatialindex-iphoneos
+pushd libspatialindex-iphoneos
+cmake ../libspatialindex \
 	-DCMAKE_INSTALL_PREFIX=@rpath \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_OSX_SYSROOT=${IOS_SDKROOT} \
@@ -40,12 +34,9 @@ cmake ../geos -DGEOS_ENABLE_TESTS=OFF \
 make
 popd
 
-mkdir -p geos-iphonesimulator
-pushd geos-iphonesimulator
-cmake ../geos -DGEOS_ENABLE_TESTS=OFF \
-	-DGEOS_ENABLE_INLINE=OFF \
-	-DGEOS_ENABLE_MACOSX_FRAMEWORK=ON \
-	-DGEOS_ENABLE_MACOSX_FRAMEWORK_UNIXCOMPAT=ON \
+mkdir -p libspatialindex-iphonesimulator
+pushd libspatialindex-iphonesimulator
+cmake ../libspatialindex \
 	-DCMAKE_INSTALL_PREFIX=@rpath \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_OSX_SYSROOT=${SIM_SDKROOT} \
@@ -61,19 +52,16 @@ popd
 # Now create frameworks:
 for platform in osx iphoneos iphonesimulator
 do 
-	for binary in libgeos_c libgeos
+	for binary in libspatialindex_c libspatialindex
 	do
 		FRAMEWORK_DIR=build/Release-${platform}/${binary}.framework
 		rm -rf ${FRAMEWORK_DIR}
 		mkdir -p ${FRAMEWORK_DIR}
 		mkdir -p ${FRAMEWORK_DIR}/Headers
-		mkdir -p ${FRAMEWORK_DIR}/Headers/capi
-		cp -R geos/include/* ${FRAMEWORK_DIR}/Headers
-		cp geos-$platform/include/geos/* ${FRAMEWORK_DIR}/Headers/geos
-		cp geos-$platform/capi/geos_c.h ${FRAMEWORK_DIR}/Headers/
-		cp geos-$platform/lib/$binary.dylib ${FRAMEWORK_DIR}/$binary
-		install_name_tool -change @rpath/libgeos_c.1.dylib  @rpath/libgeos_c.framework/libgeos_c ${FRAMEWORK_DIR}/$binary
-		install_name_tool -change @rpath/libgeos.3.10.0dev.dylib @rpath/libgeos.framework/libgeos ${FRAMEWORK_DIR}/$binary
+		cp -R libspatialindex/include/* ${FRAMEWORK_DIR}/Headers
+		cp libspatialindex-$platform/bin/$binary.dylib ${FRAMEWORK_DIR}/$binary
+		install_name_tool -change @rpath/libspatialindex_c.6.dylib  @rpath/libspatialindex_c.framework/libspatialindex_c ${FRAMEWORK_DIR}/$binary
+		install_name_tool -change @rpath/libspatialindex.6.dylib  @rpath/libspatialindex.framework/libspatialindex ${FRAMEWORK_DIR}/$binary
 		if [ "$platform" == "iphoneos" ]; then
 			cp basic_Info.plist ${FRAMEWORK_DIR}/Info.plist
 		elif [ "$platform" == "iphonesimulator" ]; then

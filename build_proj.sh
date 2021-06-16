@@ -69,6 +69,7 @@ do
 		mkdir -p ${FRAMEWORK_DIR}
 		mkdir -p ${FRAMEWORK_DIR}/Headers
 		cp -r $source_dir/include/proj ${FRAMEWORK_DIR}/Headers
+		cp $source_dir/src/*.h ${FRAMEWORK_DIR}/Headers
 		cp proj-$platform/src/proj_config.h ${FRAMEWORK_DIR}/Headers/proj/
 		cp proj-$platform/lib/$binary.dylib ${FRAMEWORK_DIR}/$binary
 		install_name_tool -change @rpath/libproj.22.dylib  @rpath/libproj.framework/libproj ${FRAMEWORK_DIR}/$binary
