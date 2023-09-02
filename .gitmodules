@@ -19,3 +19,15 @@
 [submodule "geos"]
 	path = geos
 	url = https://git.osgeo.org/gitea/geos/geos.git
+[submodule "GDAL"]
+	path = GDAL
+	url = https://github.com/OSGeo/GDAL.git
+[submodule "libspatialindex"]
+	path = libspatialindex
+	url = https://github.com/libspatialindex/libspatialindex.git
+[submodule "xeus"]
+	path = xeus
+	url = https://github.com/jupyter-xeus/xeus
+[submodule "json"]
+	path = json
+	url = git@github.com:nlohmann/json.git
