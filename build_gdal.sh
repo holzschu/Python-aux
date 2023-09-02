@@ -11,19 +11,22 @@ else
     export LIBRARY_PATH="$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
 fi
 
-SOURCE_DIR=GDAL/gdal
+
+# TODO: add sqlite3 library, to enable gpkg driver. 
+
+SOURCE_DIR=GDAL
 pushd $SOURCE_DIR
 
 make distclean
 cp ${BASE}/libproj.xcframework/macos-x86_64/libproj.framework/libproj ./libproj.dylib
 cp ${BASE}/libgeos_c.xcframework/macos-x86_64/libgeos_c.framework/libgeos_c ./libgeos_c.dylib
-# Edited configure to use "-L ." for lgeos_c (line 38518)
+# Edited configure to use "-L." for lgeos_c (line 38518) (and keep LDFLAGS)
 ./configure CC=clang CXX=clang++ \
 	CFLAGS="-isysroot ${OSX_SDKROOT} -fembed-bitcode -I ${BASE}/libproj.xcframework/macos-x86_64/libproj.framework/Headers/" \
 	CPPFLAGS="-isysroot ${OSX_SDKROOT} -fembed-bitcode -I ${BASE}/libproj.xcframework/macos-x86_64/libproj.framework/Headers/" \
 	CXXFLAGS="-isysroot ${OSX_SDKROOT} -fembed-bitcode -I ${BASE}/libproj.xcframework/macos-x86_64/libproj.framework/Headers/" \
 	LDFLAGS="-L${BASE}/${SOURCE_DIR}" \
-	--with-threads=no --with-png=internal --with-jpeg=internal --with-libtiff=internal --with-libz=internal  --with-geos=yes 
+	--with-threads=no --with-png=internal --with-jpeg=internal --with-libtiff=internal --with-libz=internal  --with-geos=yes --with-sqlite3=${OSX_SDKROOT}/usr
 make -j4 --quiet
 mkdir -p build-osx
 mkdir -p build-osx/include
@@ -34,9 +37,10 @@ cp frmts/vrt/*.h build-osx/include
 cp frmts/mem/*.h build-osx/include
 cp alg/*.h build-osx/include
 cp ogr/*.h build-osx/include
+cp generated_headers/*.h build-osx/include
 
 make distclean
-unexport LIBRARY_PATH
+unset LIBRARY_PATH
 cp ${BASE}/libproj.xcframework/ios-arm64/libproj.framework/libproj ./libproj.dylib
 cp ${BASE}/libgeos_c.xcframework/ios-arm64/libgeos_c.framework/libgeos_c ./libgeos_c.dylib
 ./configure CC=clang CXX=clang++ \
@@ -45,7 +49,8 @@ cp ${BASE}/libgeos_c.xcframework/ios-arm64/libgeos_c.framework/libgeos_c ./libge
 	CXXFLAGS="-arch arm64 -miphoneos-version-min=14.0 -isysroot ${IOS_SDKROOT} -I ${BASE}/libproj.xcframework/ios-arm64/libproj.framework/Headers/" \
 	LDFLAGS="-arch arm64 -miphoneos-version-min=14.0 -isysroot ${IOS_SDKROOT} -L${BASE}/${SOURCE_DIR} -liconv" \
 	--build=x86_64-apple-darwin --host=armv8-apple-darwin \
-	--with-threads=no --with-png=internal --with-jpeg=internal --with-libtiff=internal --with-libz=internal --with-geos=yes
+	--with-threads=no --with-png=internal --with-jpeg=internal --with-libtiff=internal --with-libz=internal --with-geos=yes  --with-sqlite3=${IOS_SDKROOT}/usr
+# LDFLAGS="-arch arm64 -miphoneos-version-min=14.0 -isysroot ${IOS_SDKROOT} -L${BASE}/${SOURCE_DIR} -liconv" make -j4 --quiet
 make -j4 --quiet
 mkdir -p build-iphoneos
 mkdir -p build-iphoneos/include
@@ -56,6 +61,7 @@ cp frmts/vrt/*.h build-iphoneos/include
 cp frmts/mem/*.h build-iphoneos/include
 cp alg/*.h build-iphoneos/include
 cp ogr/*.h build-iphoneos/include
+cp generated_headers/*.h build-iphoneos/include
 
 
 make distclean
@@ -67,7 +73,7 @@ cp ${BASE}/libgeos_c.xcframework/ios-x86_64-simulator/libgeos_c.framework/libgeo
 	CXXFLAGS="-arch x86_64 -mios-simulator-version-min=14.0  -isysroot ${SIM_SDKROOT} -I ${BASE}/libproj.xcframework/ios-x86_64-simulator/libproj.framework/Headers/" \
 	LDFLAGS="-arch x86_64 -mios-simulator-version-min=14.0  -isysroot ${SIM_SDKROOT} -L${BASE}/${SOURCE_DIR} -liconv" \
 	--host=x86_64-apple-darwin \
-	--with-threads=no --with-png=internal --with-jpeg=internal --with-libtiff=internal --with-libz=internal --with-geos=yes
+	--with-threads=no --with-png=internal --with-jpeg=internal --with-libtiff=internal --with-libz=internal --with-geos=yes  --with-sqlite3=${SIM_SDKROOT}/usr
 make -j4 --quiet
 mkdir -p build-iphonesimulator
 mkdir -p build-iphonesimulator/include
@@ -78,6 +84,7 @@ cp frmts/vrt/*.h build-iphonesimulator/include
 cp frmts/mem/*.h build-iphonesimulator/include
 cp alg/*.h build-iphonesimulator/include
 cp ogr/*.h build-iphonesimulator/include
+cp generated_headers/*.h build-iphonesimulator/include
 popd
 
 
@@ -92,7 +99,7 @@ do
 		mkdir -p ${FRAMEWORK_DIR}/Headers
 		cp -r $SOURCE_DIR/build-${platform}/include/* ${FRAMEWORK_DIR}/Headers
 		cp $SOURCE_DIR/build-$platform/$binary.dylib ${FRAMEWORK_DIR}/$binary
-		install_name_tool -change @rpath/libgdal.29.dylib  @rpath/libproj.framework/libgdal ${FRAMEWORK_DIR}/$binary
+		install_name_tool -change @rpath/libgdal.31.dylib  @rpath/libproj.framework/libgdal ${FRAMEWORK_DIR}/$binary
 		if [ "$platform" == "iphoneos" ]; then
 			cp basic_Info.plist ${FRAMEWORK_DIR}/Info.plist
 		elif [ "$platform" == "iphonesimulator" ]; then

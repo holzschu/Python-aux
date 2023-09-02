@@ -14,7 +14,7 @@ if [ -e "/usr/local/aarch64-apple-darwin20/lib/libgfortran.dylib" ];then
 fi
 # OSX 11: required for many things
 if [ -z "${LIBRARY_PATH}" ]; then
-	export LIBRARY_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
+	export LIBRARY_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX12.0.sdk/usr/lib"
 else
 	export LIBRARY_PATH="$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
 fi
@@ -52,7 +52,7 @@ else
 		CFLAGS="-miphoneos-version-min=11.0 -isysroot  ${IOS_SDKROOT} -arch arm64 -fembed-bitcode" \
 		FC="/usr/local/bin/aarch64-apple-darwin20-gfortran" \
 		LDFLAGS="-miphoneos-version-min=11.0 -arch arm64 " \
-		FFLAGS="-miphoneos-version-min=11.0 -arch arm64" \
+		FFLAGS="-miphoneos-version-min=11.0 -arch arm64 -Wa,-miphoneos-version-min=11.0 -Wl,-platform_version -Wl,ios -Wl,14.0.0 -Wl,16.4" \
 		ASFLAGS="-miphoneos-version-min=11.0 -arch arm64" \
 		AR="$(xcrun -f ar)"  all
     # gemm_tcopy.S and gemm_ncopy.S both create issues. Commented out in KERNEL.ARMV8.
@@ -63,6 +63,7 @@ else
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ -dynamic -dylib -arch arm64 -dylib_install_name /Users/holzschu/src/Xcode_iPad/Python-aux/OpenBLAS/exports/../libopenblas.0.dylib -all_load -headerpad_max_install_names -weak_reference_mismatches non-weak -o ../libopenblas_armv8p-r0.3.13.dev.dylib -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1 -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1/../../../../aarch64-apple-darwin20/lib -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1 -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1/../../../../aarch64-apple-darwin20/lib -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1 -L/usr/local/lib/gcc/aarch64-apple-darwin20/10.2.1/../../../../aarch64-apple-darwin20/lib ../libopenblas_armv8p-r0.3.13.dev.a -exported_symbols_list osx.def -lSystem -lgfortran -lemutls_w -lemutls_w -lSystem -lgfortran -lemutls_w -lemutls_w -lSystem -lgfortran -lemutls_w -lgcc -lm -lemutls_w -lgcc -lSystem -lgcc -platform_version ios 11.0 11.0
 	popd
 fi
+
  mkdir -p build-iphoneos
  cp libopenblas_armv8p-r0.3.13.dev.a build-iphoneos/libopenblas.a
  cp libopenblas_armv8p-r0.3.13.dev.dylib build-iphoneos/libopenblas.dylib

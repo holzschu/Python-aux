@@ -73,7 +73,7 @@ do
 		cp geos-$platform/capi/geos_c.h ${FRAMEWORK_DIR}/Headers/
 		cp geos-$platform/lib/$binary.dylib ${FRAMEWORK_DIR}/$binary
 		install_name_tool -change @rpath/libgeos_c.1.dylib  @rpath/libgeos_c.framework/libgeos_c ${FRAMEWORK_DIR}/$binary
-		install_name_tool -change @rpath/libgeos.3.10.0dev.dylib @rpath/libgeos.framework/libgeos ${FRAMEWORK_DIR}/$binary
+		install_name_tool -change @rpath/libgeos.3.11.0.dylib @rpath/libgeos.framework/libgeos ${FRAMEWORK_DIR}/$binary
 		if [ "$platform" == "iphoneos" ]; then
 			cp basic_Info.plist ${FRAMEWORK_DIR}/Info.plist
 		elif [ "$platform" == "iphonesimulator" ]; then
@@ -83,7 +83,9 @@ do
 		fi
 		plutil -replace CFBundleExecutable -string $binary ${FRAMEWORK_DIR}/Info.plist
 		plutil -replace CFBundleName -string $binary ${FRAMEWORK_DIR}/Info.plist
-		plutil -replace CFBundleIdentifier -string Nicolas-Holzschuch.$binary  ${FRAMEWORK_DIR}/Info.plist
+		# underscore is not allowed in CFBundleIdentifier:
+		signature=${binary//_/-}
+		plutil -replace CFBundleIdentifier -string Nicolas-Holzschuch.$signature  ${FRAMEWORK_DIR}/Info.plist
 		install_name_tool -id @rpath/$binary.framework/$binary   ${FRAMEWORK_DIR}/$binary
 	done
 done

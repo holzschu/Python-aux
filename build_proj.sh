@@ -6,10 +6,13 @@ OSX_SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 IOS_SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
 
-# curl -OL https://download.osgeo.org/proj/proj-8.0.1.tar.gz
-# tar xzf proj-8.0.1.tar.gz
-# rm proj-8.0.1.tar.gz
-source_dir=proj-8.0.1
+export OSX_VERSION=11.5
+export MACOSX_DEPLOYMENT_TARGET=$OSX_VERSION
+
+# curl -OL https://download.osgeo.org/proj/proj-9.1.0.tar.gz
+# tar xzf proj-9.1.0.tar.gz
+# rm proj-9.1.0.tar.gz
+source_dir=proj-9.1.0
 
 # proj dos not use SYSROOT or CFLAGS with cmake, so we use configure
 
@@ -17,6 +20,7 @@ mkdir -p proj-osx
 pushd proj-osx
 cmake ../$source_dir \
 	-DENABLE_CURL=OFF -DENABLE_TIFF=OFF -DBUILD_TESTING=OFF -DBUILD_PROJSYNC=OFF \
+	-DCMAKE_OSX_DEPLOYMENT_TARGET=${OSX_VERSION} \
 	-DCMAKE_INSTALL_PREFIX=@rpath \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_OSX_SYSROOT=${OSX_SDKROOT} \

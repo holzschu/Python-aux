@@ -71,7 +71,9 @@ do
 		fi
 		plutil -replace CFBundleExecutable -string $binary ${FRAMEWORK_DIR}/Info.plist
 		plutil -replace CFBundleName -string $binary ${FRAMEWORK_DIR}/Info.plist
-		plutil -replace CFBundleIdentifier -string Nicolas-Holzschuch.$binary  ${FRAMEWORK_DIR}/Info.plist
+		# underscore is not allowed in CFBundleIdentifier:
+		signature=${binary//_/-}
+		plutil -replace CFBundleIdentifier -string Nicolas-Holzschuch.$signature  ${FRAMEWORK_DIR}/Info.plist
 		install_name_tool -id @rpath/$binary.framework/$binary   ${FRAMEWORK_DIR}/$binary
 	done
 done

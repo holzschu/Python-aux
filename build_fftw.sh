@@ -4,11 +4,11 @@ OSX_SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 IOS_SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
 
-curl -OL http://www.fftw.org/fftw-3.3.9.tar.gz 
-tar xzf fftw-3.3.9.tar.gz 
-rm fftw-3.3.9.tar.gz 
+curl -OL http://www.fftw.org/fftw-3.3.10.tar.gz 
+tar xzf fftw-3.3.10.tar.gz 
+rm fftw-3.3.10.tar.gz 
 
-SOURCE_DIR=fftw-3.3.9
+SOURCE_DIR=fftw-3.3.10
 pushd $SOURCE_DIR
 
 make distclean
