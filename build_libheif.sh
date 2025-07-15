@@ -22,12 +22,13 @@ sh ./configure CC=clang CXX=clang++ \
 make -j4 
 mkdir -p build-iphoneos
 mkdir -p build-iphoneos/include
-mkdir -p build-iphoneos/libxslt/include/libxslt/
-mkdir -p build-iphoneos/libexslt/include/libexslt/
-cp libxslt/.libs/libxslt.a build-iphoneos
-cp libexslt/.libs/libexslt.a build-iphoneos
-cp libxslt/*.h build-iphoneos/libxslt/include/libxslt/
-cp libexslt/*.h build-iphoneos/libexslt/include/libexslt/
+mkdir -p build-iphoneos/include/libheif
+cp libheif/.libs/libheif.a build-iphoneos
+for file in heif.h heif_plugin.h heif_version.h heif_cxx.h
+cp libheif/$file build-iphoneos/libheif/include/libheif/
+
+exit 0
+# While we don't have the full framework 
 
 make distclean
 sh ./configure CC=clang CXX=clang++ \

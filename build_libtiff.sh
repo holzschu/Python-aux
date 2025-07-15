@@ -6,11 +6,11 @@ OSX_SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 IOS_SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
 SIM_SDKROOT=$(xcrun --sdk iphonesimulator --show-sdk-path)
 
-curl -OL http://download.osgeo.org/libtiff/tiff-4.1.0.zip 
-unzip -o tiff-4.1.0.zip 
-rm tiff-4.1.0.zip 
+curl -OL http://download.osgeo.org/libtiff/tiff-4.7.0.zip 
+unzip -o tiff-4.7.0.zip 
+rm tiff-4.7.0.zip 
 
-SOURCE_DIR=tiff-4.1.0
+SOURCE_DIR=tiff-4.7.0
 # libpng
 pushd $SOURCE_DIR
 make distclean
@@ -18,7 +18,7 @@ make distclean
 	CFLAGS="-arch arm64 -miphoneos-version-min=11.0 -isysroot ${IOS_SDKROOT} -fembed-bitcode" \
 	CPPFLAGS="-arch arm64 -miphoneos-version-min=11.0 -isysroot ${IOS_SDKROOT} -fembed-bitcode" \
 	CXXFLAGS="-arch arm64 -miphoneos-version-min=11.0 -isysroot ${IOS_SDKROOT} -fembed-bitcode" \
-	--build=x86_64-apple-darwin --host=armv8-apple-darwin cross_compiling=yes
+	--build=x86_64-apple-darwin --host=armv8-apple-darwin cross_compiling=yes --disable-shared
 make -j4 --quiet
 mkdir -p build-iphoneos
 mkdir -p build-iphoneos/include
@@ -30,7 +30,7 @@ make distclean
 	CFLAGS="-arch x86_64 -mios-simulator-version-min=11.0 -isysroot ${SIM_SDKROOT} -fembed-bitcode" \
 	CPPFLAGS="-arch x86_64 -mios-simulator-version-min=11.0 -isysroot ${SIM_SDKROOT} -fembed-bitcode" \
 	CXXFLAGS="-arch x86_64 -mios-simulator-version-min=11.0 -isysroot ${SIM_SDKROOT} -fembed-bitcode" \
-	--build=x86_64-apple-darwin --host=x86_64-apple-darwin cross_compiling=yes
+	--build=x86_64-apple-darwin --host=x86_64-apple-darwin cross_compiling=yes  --disable-shared
 make -j4 --quiet
 mkdir -p build-iphonesimulator
 mkdir -p build-iphonesimulator/include
