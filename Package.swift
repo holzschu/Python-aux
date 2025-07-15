@@ -58,7 +58,7 @@ let package = Package(
         .binaryTarget(
             name: "libtiff",
             url: "https://github.com/holzschu/Python-aux/releases/download/1.0/libtiff.xcframework.zip",
-            checksum: "bbda6117dec4495aeeb4f96c8a1cdb3fac7f0e79375dd7bce5117108d694110e"
+            checksum: "0678de08083fd13256d4375f8c06e802e12dcabd5f41b80f64b84c065f86d2ad"
         ),
         .binaryTarget(
             name: "libxslt",
