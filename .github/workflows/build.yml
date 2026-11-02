@@ -1,0 +1,425 @@
+name: CI
+
+on:
+  pull_request:
+    paths-ignore:
+    - '**.md'
+  workflow_dispatch:
+  push:
+    tags:
+    - 'v*'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Building xcframeworks
+    runs-on: macos-26
+    timeout-minutes: 120
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+
+    - name: Toolchain and sources
+      run: |
+        xcodebuild -version
+        df -h .
+        brew install autoconf automake libtool pkgconf cmake
+        git submodule update --init --depth 1 harfbuzz libxslt
+        git submodule status harfbuzz libxslt
+
+    - name: Build libraries
+      run: |
+        nice -n 15 bash build_libpng.sh
+        nice -n 15 bash build_freetype.sh
+        nice -n 15 bash build_libjpg.sh
+        nice -n 15 bash build_libtiff.sh
+        nice -n 15 bash build_libxslt.sh
+
+    - name: Link codec and XSLT consumers and run on arm64 Simulator
+      run: |
+        mkdir -p .build
+        for arch in arm64 x86_64; do
+          xcrun --sdk iphonesimulator clang -target "$arch-apple-ios14.0-simulator" tests/codecs.c \
+            -I libjpeg.xcframework/ios-arm64_x86_64-simulator/Headers \
+            -I libtiff.xcframework/ios-arm64_x86_64-simulator/Headers \
+            libtiff.xcframework/ios-arm64_x86_64-simulator/libtiff.a \
+            libjpeg.xcframework/ios-arm64_x86_64-simulator/libjpeg.a -lz -o ".build/codecs-$arch"
+        done
+        for arch in arm64 x86_64; do
+          xcrun --sdk iphonesimulator clang -target "$arch-apple-ios14.0-simulator" tests/xslt.c \
+            -I "$(xcrun --sdk iphonesimulator --show-sdk-path)/usr/include/libxml2" \
+            -I libxslt.xcframework/ios-arm64_x86_64-simulator/Headers \
+            -I libexslt.xcframework/ios-arm64_x86_64-simulator/Headers \
+            libexslt.xcframework/ios-arm64_x86_64-simulator/libexslt.a \
+            libxslt.xcframework/ios-arm64_x86_64-simulator/libxslt.a -lxml2 -o ".build/xslt-$arch"
+        done
+        runtime=$(xcrun simctl list runtimes -j | jq -r '.runtimes[] | select(.isAvailable and (.identifier | contains("iOS"))) | .identifier' | tail -n 1)
+        device=$(xcrun simctl create Python-aux-codecs com.apple.CoreSimulator.SimDeviceType.iPhone-17 "$runtime")
+        trap 'xcrun simctl shutdown "$device"; xcrun simctl delete "$device"' EXIT
+        xcrun simctl boot "$device"
+        xcrun simctl bootstatus "$device" -b
+        xcrun simctl spawn "$device" "$PWD/.build/codecs-arm64"
+        xcrun simctl spawn "$device" "$PWD/.build/xslt-arm64"
+
+    - name: Package, verify slices and checksum
+      run: |
+        mkdir -p .build
+        cp -R libjpeg.xcframework libtiff.xcframework libxslt.xcframework libexslt.xcframework .build/
+        echo '| xcframework | slice | archs |' >> "$GITHUB_STEP_SUMMARY"
+        echo '| --- | --- | --- |' >> "$GITHUB_STEP_SUMMARY"
+        for name in libpng freetype harfbuzz libjpeg libtiff libxslt libexslt; do
+          if [[ $name != libjpeg && $name != libtiff && $name != libxslt && $name != libexslt ]]; then
+            xcodebuild -create-xcframework \
+              -framework "build/Release-iphoneos/$name.framework" \
+              -framework "build/Release-iphonesimulator/$name.framework" \
+              -output ".build/$name.xcframework"
+          fi
+          xcf=".build/$name.xcframework"
+          plutil -convert json -o - "$xcf/Info.plist" | jq -e '
+            [.AvailableLibraries[] | {id: .LibraryIdentifier, archs: (.SupportedArchitectures | sort)}] | sort_by(.id) ==
+            [{id: "ios-arm64", archs: ["arm64"]}, {id: "ios-arm64_x86_64-simulator", archs: ["arm64", "x86_64"]}]' >/dev/null
+          for slice in ios-arm64 ios-arm64_x86_64-simulator; do
+            bin="$xcf/$slice/$name.framework/$name"
+            if [[ $name == libjpeg || $name == libtiff || $name == libxslt || $name == libexslt ]]; then
+              bin="$xcf/$slice/$name.a"
+            fi
+            archs=$(lipo -archs "$bin")
+            case "$slice:$archs" in
+              ios-arm64:arm64|"ios-arm64_x86_64-simulator:arm64 x86_64"|"ios-arm64_x86_64-simulator:x86_64 arm64") ;;
+              *) echo "::error::Unexpected slice $slice: $archs"; exit 1 ;;
+            esac
+            echo "| $name | $slice | $archs |" >> "$GITHUB_STEP_SUMMARY"
+            if [[ $name == libjpeg || $name == libtiff || $name == libxslt || $name == libexslt ]]; then
+              # Inspect every archive member; the framework audit accepts dylibs only.
+              expected_platform=2
+              max_minos=11
+              if [[ $slice == *simulator ]]; then expected_platform=7; max_minos=14; fi
+              xcrun otool -l "$bin" > ".build/$name-$slice-load-commands.txt"
+              awk -v expected="$expected_platform" -v maximum="$max_minos" '
+                /\(architecture arm64\)/ {arm64=1}
+                /\(architecture x86_64\)/ {arm64=0}
+                /\.a\([^)]*\.o\)/ {members++}
+                /cmd LC_BUILD_VERSION/ {build=1; versions++}
+                build && /platform/ {if ($2 != expected) bad=1}
+                build && /minos/ {if ($2+0 > maximum) bad=1; build=0}
+                /cmd LC_VERSION_MIN_IPHONEOS/ {if (expected == 7 && arm64) bad=1; legacy=1; versions++}
+                legacy && /version / {if ($2+0 > maximum) bad=1; legacy=0}
+                END {if (bad || !members || members != versions) exit 1}
+              ' ".build/$name-$slice-load-commands.txt" || { echo "::error::$name $slice archive load commands failed audit"; exit 1; }
+              continue
+            fi
+            otool -L "$bin"
+            if otool -L "$bin" | grep $'\t' | grep -E '/opt/homebrew|/usr/local|/Users/runner'; then exit 1; fi
+          done
+          (cd .build && zip --symlinks -rq "$name.xcframework.zip" "$name.xcframework")
+          sum=$(swift package compute-checksum ".build/$name.xcframework.zip")
+          echo "$sum  $name.xcframework.zip" >> .build/checksums.txt
+        done
+        cp .build/checksums.txt .build/release.md
+        du -sh build .build
+        df -h .
+
+    - uses: actions/upload-artifact@v7
+      with:
+        name: xcframeworks
+        include-hidden-files: true
+        if-no-files-found: error
+        path: |
+          .build/*.xcframework.zip
+          .build/checksums.txt
+          .build/release.md
+          .build/*-load-commands.txt
+
+  fortran:
+    name: OpenBLAS with Fortran LAPACK
+    runs-on: macos-26
+    timeout-minutes: 120
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+
+    - name: Toolchain and pinned sources
+      run: |
+        brew update
+        brew install flang cmake ninja
+        flang --version
+        xcodebuild -version
+        git submodule update --init --depth 1 OpenBLAS
+        flang_version=$(flang --version | awk 'NR == 1 {for (i = 1; i < NF; i++) if ($i == "version") {print $(i+1); exit}}')
+        mkdir -p .build
+        printf '%s\n' "$flang_version" > .build/flang-version.txt
+        git clone --filter=blob:none --sparse --depth 1 --branch "llvmorg-$flang_version" https://github.com/llvm/llvm-project.git .build/llvm
+        git -C .build/llvm sparse-checkout set flang-rt cmake llvm/cmake llvm/include/llvm/Frontend flang/include flang/cmake runtimes llvm/utils/llvm-lit flang/lib/Decimal libc/shared libc/src/__support
+        curl -fL --retry 3 https://raw.githubusercontent.com/Reference-LAPACK/lapack/v3.12.1/SRC/dpotrf.f -o .build/dpotrf.f
+        echo 'ea50dbb7c75ca65c4e388ec63b00bc0f3ebbaf9d8d358644d727319007df972a  .build/dpotrf.f' | shasum -a 256 -c -
+
+    - name: Compile LAPACK objects and build matching runtimes
+      run: |
+        nice -n 15 flang -target arm64-apple-ios14.0 -c .build/dpotrf.f -o .build/dpotrf-ios.o
+        nice -n 15 flang -target arm64-apple-ios14.0-simulator -c .build/dpotrf.f -o .build/dpotrf-simulator.o
+        nice -n 15 flang -target x86_64-apple-ios14.0-simulator -c .build/dpotrf.f -o .build/dpotrf-simulator-x86_64.o
+        xcrun vtool -show-build .build/dpotrf-simulator-x86_64.o
+        xcrun vtool -show-build .build/dpotrf-ios.o
+        xcrun vtool -show-build .build/dpotrf-simulator.o
+        nice -n 15 bash build_flang_runtime.sh .build/llvm .build/runtime
+
+    - name: Build and link OpenBLAS for both platforms
+      run: nice -n 15 bash build_openblas_flang.sh .build/runtime .build/openblas
+
+    - name: Run LAPACK on Simulator
+      run: |
+        framework="$PWD/.build/openblas/iphonesimulator-universal"
+        for arch in arm64 x86_64; do
+          nice -n 15 flang -target "$arch-apple-ios14.0-simulator" -c tests/runtime.f90 -o ".build/runtime-probe-$arch.o"
+          xcrun --sdk iphonesimulator clang -target "$arch-apple-ios14.0-simulator" tests/lapack.c \
+            -include "$framework/openblas.framework/Headers/cblas.h" \
+            ".build/runtime-probe-$arch.o" \
+            -F"$framework" -framework openblas -F"$PWD/.build/runtime/iphonesimulator-universal" -framework flang_rt \
+            -Wl,-rpath,"$framework" -Wl,-rpath,"$PWD/.build/runtime/iphonesimulator-universal" -o ".build/lapack-test-$arch"
+        done
+        runtime=$(xcrun simctl list runtimes -j | jq -r '.runtimes[] | select(.isAvailable and (.identifier | contains("iOS"))) | .identifier' | tail -n 1)
+        device=$(xcrun simctl create OpenBLAS-LAPACK com.apple.CoreSimulator.SimDeviceType.iPhone-17 "$runtime")
+        trap 'xcrun simctl shutdown "$device"; xcrun simctl delete "$device"' EXIT
+        xcrun simctl boot "$device"
+        xcrun simctl bootstatus "$device" -b
+        xcrun simctl spawn "$device" "$PWD/.build/lapack-test-arm64"
+
+    - name: Package and checksum
+      run: |
+        xcodebuild -create-xcframework \
+          -framework "$PWD/.build/openblas/iphoneos/openblas.framework" \
+          -framework "$PWD/.build/openblas/iphonesimulator-universal/openblas.framework" \
+          -output .build/openblas.xcframework
+        xcodebuild -create-xcframework \
+          -framework "$PWD/.build/runtime/iphoneos/flang_rt.framework" \
+          -framework "$PWD/.build/runtime/iphonesimulator-universal/flang_rt.framework" \
+          -output .build/flang_rt.xcframework
+        for name in openblas flang_rt; do
+          for slice in ios-arm64 ios-arm64_x86_64-simulator; do
+            bin=".build/$name.xcframework/$slice/$name.framework/$name"
+            if [[ $slice == ios-arm64 ]]; then
+              test "$(lipo -archs "$bin")" = arm64
+            else
+              test "$(lipo -archs "$bin")" = 'x86_64 arm64'
+            fi
+            xcrun vtool -show-build "$bin"
+            otool -L "$bin"
+            if otool -L "$bin" | grep $'\t' | grep -E '/opt/homebrew|/usr/local|/Users/runner'; then exit 1; fi
+          done
+        done
+        for name in openblas flang_rt; do
+          (cd .build && zip --symlinks -rq "$name.xcframework.zip" "$name.xcframework")
+          sum=$(swift package compute-checksum ".build/$name.xcframework.zip")
+          echo "$sum  $name.xcframework.zip"
+        done > .build/openblas-checksums.txt
+
+    - uses: actions/upload-artifact@v7
+      with:
+        name: openblas
+        if-no-files-found: error
+        path: |
+          .build/openblas.xcframework.zip
+          .build/flang_rt.xcframework.zip
+          .build/openblas-checksums.txt
+          .build/flang-version.txt
+
+  science:
+    name: NumPy and SciPy for iOS
+    needs: fortran
+    runs-on: macos-26
+    timeout-minutes: 240
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/download-artifact@v8
+      with:
+        name: openblas
+        path: .build/science-inputs
+    - name: Toolchain and pinned Python recipes
+      run: |
+        brew update
+        brew install autoconf automake libtool cmake ninja openssl@3 pkgconf uv flang
+        flang_version=$(flang --version | awk 'NR == 1 {for (i = 1; i < NF; i++) if ($i == "version") {print $(i+1); exit}}')
+        test "$flang_version" = "$(cat .build/science-inputs/flang-version.txt)"
+        (cd .build/science-inputs && shasum -a 256 -c openblas-checksums.txt)
+        for name in openblas flang_rt; do unzip -q ".build/science-inputs/$name.xcframework.zip" -d .build/science-inputs; done
+        git init .build/cpython
+        git -C .build/cpython fetch --depth 1 https://github.com/demrom/cpython.git 0711fa5bfe722c444e4f0eb5d820652081e56be7
+        git -C .build/cpython checkout --detach FETCH_HEAD
+        test "$(git -C .build/cpython rev-parse HEAD)" = 0711fa5bfe722c444e4f0eb5d820652081e56be7
+        git -C .build/cpython submodule update --init --recursive --depth 1 packages/numpy packages/cython packages/pybind11
+    - name: Build core Python and scientific frameworks
+      run: |
+        nice -n 15 bash .build/cpython/scripts/build-ci-ios.sh "$PWD/.build/python-core"
+        nice -n 15 bash .build/cpython/scripts/build-ci-science.sh "$PWD/.build/python-core" "$PWD/.build/science-inputs"
+    - name: Run target Python numerical checks on Simulator
+      run: |
+        science="$PWD/.build/cpython/.build/science"
+        core="$PWD/.build/python-core"
+        consumer="$science/consumer"
+        mkdir -p "$consumer/Frameworks"
+        tar -xzf "$science/dist/python-science.tar.gz" -C "$consumer"
+        for archive in "$science/dist/"*.xcframework.zip; do
+          unzip -q "$archive" -d "$consumer"
+          name=$(basename "$archive" .xcframework.zip)
+          cp -R "$consumer/$name.xcframework/ios-arm64_x86_64-simulator/$name.framework" "$consumer/Frameworks/"
+        done
+        runtime=$(xcrun simctl list runtimes -j | jq -r '[.runtimes[] | select(.isAvailable and (.identifier | contains("iOS")) and any(.supportedDeviceTypes[]?; .identifier == "com.apple.CoreSimulator.SimDeviceType.iPhone-17"))] | sort_by(.version | split(".") | map(tonumber)) | last.identifier // empty')
+        test -n "$runtime"
+        device=$(xcrun simctl create Python-aux-Science com.apple.CoreSimulator.SimDeviceType.iPhone-17 "$runtime")
+        trap 'xcrun simctl shutdown "$device"; xcrun simctl delete "$device"' EXIT
+        xcrun simctl boot "$device"
+        xcrun simctl bootstatus "$device" -b
+        status=0
+        SIMCTL_CHILD_PYTHONHOME="$core/install/iphonesimulator" \
+        SIMCTL_CHILD_PYTHONPATH="$consumer/iphonesimulator/lib/python3.13/site-packages" \
+        SIMCTL_CHILD_APPDIR="$consumer" \
+        SIMCTL_CHILD_DYLD_FRAMEWORK_PATH="$core/install/iphonesimulator:$science/iphonesimulator/native" \
+          xcrun simctl spawn "$device" "$science/science-python-arm64" "$PWD/.build/cpython/iOS/tests/science.py" > "$science/dist/science-runtime.log" 2>&1 || status=$?
+        cat "$science/dist/science-runtime.log"
+        test "$status" = 0
+        for result in \
+          "NumPy solve, eigenvalues, Cholesky and SVD PASS" \
+          "SciPy LAPACK, special functions, quadrature, spline and four PROPACK types PASS" \
+          "SciPy statistics, optimization, signal, IO and ODR imports PASS"; do
+          test "$(grep -c -x -F "$result" "$science/dist/science-runtime.log")" = 2
+        done
+        grep -q '^SCIENCE_REENTRY_PASSED$' "$science/dist/science-runtime.log"
+    - uses: actions/upload-artifact@v7
+      with:
+        name: science
+        include-hidden-files: true
+        if-no-files-found: error
+        path: |
+          .build/cpython/.build/science/dist/*.xcframework.zip
+          .build/cpython/.build/science/dist/python-science.tar.gz
+          .build/cpython/.build/science/dist/science-checksums.txt
+          .build/cpython/.build/science/dist/science-release.md
+          .build/cpython/.build/science/dist/*-ios-*.txt
+          .build/cpython/.build/science/dist/science-runtime.log
+
+    - uses: actions/upload-artifact@v7
+      if: failure()
+      with:
+        name: science-failure-log
+        if-no-files-found: ignore
+        path: .build/cpython/.build/science/dist/science-runtime.log
+
+  gis:
+    name: Building GIS frameworks
+    runs-on: macos-26
+    timeout-minutes: 120
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - name: Toolchain and pinned GIS sources
+      run: |
+        xcodebuild -version
+        brew install cmake ninja
+        git submodule update --init --depth 1 GDAL geos libspatialindex
+        git submodule status GDAL geos libspatialindex
+    - name: Build six GIS frameworks
+      run: nice -n 15 bash build_gis.sh
+    - name: Link GIS consumers and run on arm64 Simulator
+      run: |
+        mkdir -p .build/gis-data
+        tar -xzf proj-data.tar.gz -C .build/gis-data
+        for arch in arm64 x86_64; do
+          framework="$PWD/.build/gis/iphonesimulator-universal"
+          xcrun --sdk iphonesimulator clang -target "$arch-apple-ios14.0-simulator" tests/gis.c \
+            -I"$framework/libgeos_c.framework/Headers" -I"$framework/libproj.framework/Headers" \
+            -I"$framework/libgdal.framework/Headers" -I"$framework/libspatialindex_c.framework/Headers" -F"$framework" \
+            -framework libgeos -framework libgeos_c -framework libproj -framework libgdal \
+            -framework libspatialindex -framework libspatialindex_c \
+            -Wl,-rpath,"$framework" -o ".build/gis-test-$arch"
+        done
+        runtime=$(xcrun simctl list runtimes -j | jq -r '.runtimes[] | select(.isAvailable and (.identifier | contains("iOS"))) | .identifier' | tail -n 1)
+        device=$(xcrun simctl create Python-aux-GIS com.apple.CoreSimulator.SimDeviceType.iPhone-17 "$runtime")
+        trap 'xcrun simctl shutdown "$device"; xcrun simctl delete "$device"' EXIT
+        xcrun simctl boot "$device"
+        xcrun simctl bootstatus "$device" -b
+        xcrun simctl spawn "$device" "$PWD/.build/gis-test-arm64" "$PWD/.build/gis-data/proj"
+    - name: Audit GIS slices and checksum
+      run: |
+        for name in libgeos libgeos_c libproj libgdal libspatialindex libspatialindex_c; do
+          plutil -convert json -o - "$name.xcframework/Info.plist" | jq -e '
+            [.AvailableLibraries[] | {id: .LibraryIdentifier, archs: (.SupportedArchitectures | sort)}] | sort_by(.id) ==
+            [{id: "ios-arm64", archs: ["arm64"]}, {id: "ios-arm64_x86_64-simulator", archs: ["arm64", "x86_64"]}]' >/dev/null
+          for slice in ios-arm64 ios-arm64_x86_64-simulator; do
+            binary="$name.xcframework/$slice/$name.framework/$name"
+            expected=IOS
+            archs=arm64
+            if [[ $slice == *simulator ]]; then expected=IOSSIMULATOR; archs='arm64 x86_64'; fi
+            actual=$(lipo -archs "$binary" | tr ' ' '\n' | sort | paste -sd ' ' -)
+            test "$actual" = "$archs"
+            for arch in $archs; do
+              xcrun vtool -arch "$arch" -show-build "$binary" > ".build/gis/$name-$slice-$arch-platform.txt"
+              awk -v expected="$expected" '
+                $1 == "platform" { if ($2 != expected) exit 1; platforms++ }
+                $1 == "minos" { split($2, version, "."); if (version[1] > 14 || (version[1] == 14 && version[2] > 0)) exit 1; versions++ }
+                END { if (platforms != 1 || versions != 1) exit 1 }
+              ' ".build/gis/$name-$slice-$arch-platform.txt"
+            done
+            otool -L "$binary" >&2
+            if otool -L "$binary" | grep $'\t' | grep -E '/opt/homebrew|/usr/local|/Users/|/private/|/tmp/'; then exit 1; fi
+          done
+          zip --symlinks -rq "$name.xcframework.zip" "$name.xcframework"
+          echo "$(swift package compute-checksum "$name.xcframework.zip")  $name.xcframework.zip"
+        done > gis-checksums.txt
+        shasum -a 256 proj-data.tar.gz >> gis-checksums.txt
+    - uses: actions/upload-artifact@v7
+      with:
+        name: gis
+        if-no-files-found: error
+        path: |
+          libgeos.xcframework.zip
+          libgeos_c.xcframework.zip
+          libproj.xcframework.zip
+          libgdal.xcframework.zip
+          libspatialindex.xcframework.zip
+          libspatialindex_c.xcframework.zip
+          proj-data.tar.gz
+          gis-checksums.txt
+
+  release:
+    name: Publishing release
+    needs: [build, fortran, gis, science]
+    if: startsWith(github.ref, 'refs/tags/v') && github.repository == 'holzschu/Python-aux'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/download-artifact@v8
+      with:
+        pattern: '*'
+        merge-multiple: true
+        path: dist
+
+    - name: Create Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cat dist/openblas-checksums.txt dist/gis-checksums.txt dist/science-checksums.txt >> dist/checksums.txt
+        cp dist/checksums.txt dist/release.md
+        if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+          gh release upload "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
+            dist/*.xcframework.zip dist/python-science.tar.gz dist/proj-data.tar.gz dist/checksums.txt
+        else
+          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
+            --verify-tag --latest=false --title "Release $GITHUB_REF_NAME" --notes-file dist/release.md \
+            dist/*.xcframework.zip dist/python-science.tar.gz dist/proj-data.tar.gz dist/checksums.txt
+        fi

@@ -1,0 +1,42 @@
+diff --git i/frmts/png/libpng/pngpriv.h w/frmts/png/libpng/pngpriv.h
+index bbcff107f..89da9c0be 100644
+--- i/frmts/png/libpng/pngpriv.h
++++ w/frmts/png/libpng/pngpriv.h
+@@ -522,7 +522,7 @@
+ #  include <float.h>
+
+ #  if (defined(__MWERKS__) && defined(macintosh)) || defined(applec) || \
+-    defined(THINK_C) || defined(__SC__) || defined(TARGET_OS_MAC)
++    defined(THINK_C) || defined(__SC__)
+    /* We need to check that <math.h> hasn't already been included earlier
+     * as it seems it doesn't agree with <fp.h>, yet we should really use
+     * <fp.h> if possible.
+diff --git i/frmts/zlib/zutil.h w/frmts/zlib/zutil.h
+index d9a20ae1b..1451f465d 100644
+--- i/frmts/zlib/zutil.h
++++ w/frmts/zlib/zutil.h
+@@ -137,7 +137,7 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
+ #  endif
+ #endif
+
+-#if defined(MACOS) || defined(TARGET_OS_MAC)
++#ifdef MACOS
+ #  define OS_CODE  7
+ #  ifndef Z_SOLO
+ #    if defined(__MWERKS__) && __dest_os != __be_os && __dest_os != __win32_os
+diff --git i/ogr/ogrsf_frmts/CMakeLists.txt w/ogr/ogrsf_frmts/CMakeLists.txt
+index 9c4f797f8..66283a51e 100644
+--- i/ogr/ogrsf_frmts/CMakeLists.txt
++++ w/ogr/ogrsf_frmts/CMakeLists.txt
+@@ -51,9 +51,9 @@ ogr_optional_driver(mapml MapML)
+ # ######################################################################################################################
+ #
+ # XML drivers
+-ogr_dependent_driver(gpx "GPX - GPS Exchange Format" "GDAL_USE_EXPAT")
++ogr_optional_driver(gpx GPX) # Preserve GPX writing when Expat is unavailable.
+ ogr_dependent_driver(gmlas GMLAS "GDAL_USE_XERCESC;OGR_ENABLE_DRIVER_PGDUMP")
+-ogr_dependent_driver(svg "Scalable Vector Graphics" "GDAL_USE_EXPAT")
++ogr_optional_driver(svg SVG) # Preserve registration without Expat, as in autotools.
+ ogr_dependent_driver(csw CSW "GDAL_USE_CURL")
+ ogr_dependent_driver(dwg DWG "GDAL_USE_TEIGHA")
+ ogr_dependent_driver(filegdb FileGDB "GDAL_USE_FILEGDB")

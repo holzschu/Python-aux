@@ -1,0 +1,95 @@
+diff --git i/flang-rt/cmake/modules/AddFlangRT.cmake w/flang-rt/cmake/modules/AddFlangRT.cmake
+index 79060535..8ad133e0 100644
+--- i/flang-rt/cmake/modules/AddFlangRT.cmake
++++ w/flang-rt/cmake/modules/AddFlangRT.cmake
+@@ -226,7 +226,7 @@ function (add_flangrt_library name)
+   endforeach ()
+ 
+  set(TARGET_FLAGS)
+-  if(APPLE)
++  if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+     set(DARWIN_EMBEDDED_PLATFORMS)
+     set(DARWIN_osx_BUILTIN_MIN_VER 10.7)
+     set(DARWIN_osx_BUILTIN_MIN_VER_FLAG
+diff --git i/flang-rt/lib/runtime/execute.cpp w/flang-rt/lib/runtime/execute.cpp
+index 4fd6a1e0..0eb13855 100644
+--- i/flang-rt/lib/runtime/execute.cpp
++++ w/flang-rt/lib/runtime/execute.cpp
+@@ -19,6 +19,10 @@
+ #include <future>
+ #include <limits>
+ 
++#ifdef __APPLE__
++#include <TargetConditionals.h>
++#endif
++
+ #ifdef _WIN32
+ #include "flang/Common/windows-include.h"
+ #else
+@@ -201,6 +205,14 @@ void RTNAME(ExecuteCommandLine)(const Descriptor &command, bool wait,
+     RUNTIME_CHECK(terminator, IsValidCharDescriptor(cmdmsg));
+   }
+ 
++#if defined(__APPLE__) && TARGET_OS_IPHONE
++  constexpr char unsupported[]{"Command line execution is not supported on iOS."};
++  if (!cmdstat) {
++    terminator.Crash(unsupported);
++  }
++  StoreIntToDescriptor(cmdstat, NO_SUPPORT_ERR, terminator);
++  CheckAndCopyCharsToDescriptor(cmdmsg, unsupported);
++#else
+   const char *cmd{newCmd};
+ #ifdef _WIN32
+   // Construct a string that looks like
+@@ -306,6 +318,7 @@ void RTNAME(ExecuteCommandLine)(const Descriptor &command, bool wait,
+ 
+ #ifdef _WIN32
+   FreeMemory(newCmdWin);
++#endif
+ #endif
+ 
+   // Deallocate memory if EnsureNullTerminated dynamically allocated memory
+diff --git i/flang-rt/lib/runtime/trampoline.cpp w/flang-rt/lib/runtime/trampoline.cpp
+index 871c6d22..490d78c2 100644
+--- i/flang-rt/lib/runtime/trampoline.cpp
++++ w/flang-rt/lib/runtime/trampoline.cpp
+@@ -54,6 +54,10 @@
+ #include <cstdlib>
+ #include <cstring>
+ 
++#ifdef __APPLE__
++#include <TargetConditionals.h>
++#endif
++
+ // Platform-specific headers for memory mapping.
+ #if defined(_WIN32)
+ #include <windows.h>
+@@ -193,6 +197,10 @@ private:
+   static constexpr std::size_t kInvalidIndex{~std::size_t{0}};
+ 
+   void ensureInitialized() {
++#if defined(__APPLE__) && TARGET_OS_IPHONE
++    Terminator{__FILE__, __LINE__}.Crash(
++        "Runtime trampolines are not supported on iOS.");
++#endif
+     if (initialized_) {
+       return;
+     }
+@@ -221,7 +229,7 @@ private:
+ #if defined(_WIN32)
+     codeRegion_ = VirtualAlloc(
+         nullptr, codeSize, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+-#elif defined(__APPLE__) && defined(__aarch64__)
++#elif defined(__APPLE__) && defined(__aarch64__) && !TARGET_OS_IPHONE
+     // macOS Apple Silicon: MAP_JIT is required for pages that will become
+     // executable. Use pthread_jit_write_protect_np to toggle W↔X.
+     codeRegion_ = mmap(nullptr, codeSize, PROT_READ | PROT_WRITE | PROT_EXEC,
+@@ -283,7 +291,7 @@ private:
+ #if defined(_WIN32)
+     DWORD oldProtect;
+     VirtualProtect(codeRegion_, codeSize, PAGE_EXECUTE_READ, &oldProtect);
+-#elif defined(__APPLE__) && defined(__aarch64__)
++#elif defined(__APPLE__) && defined(__aarch64__) && !TARGET_OS_IPHONE
+     // Switch back to execute-only (MAP_JIT manages per-thread W^X).
+     if (__builtin_available(macOS 11.0, *)) {
+       pthread_jit_write_protect_np(1); // 1 = executable

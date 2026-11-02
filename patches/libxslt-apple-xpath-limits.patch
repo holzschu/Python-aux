@@ -1,0 +1,14 @@
+diff --git i/libxslt/functions.c w/libxslt/functions.c
+index 7887dda..fa042cf 100644
+--- i/libxslt/functions.c
++++ w/libxslt/functions.c
+@@ -178,7 +178,8 @@ xsltDocumentFunctionLoadDocument(xmlXPathParserContextPtr ctxt, xmlChar* URI)
+ 	goto out_fragment;
+     }
+ 
+-#if LIBXML_VERSION >= 20911 || \
++#if (LIBXML_VERSION >= 20911 && \
++     (!defined(__APPLE__) || defined(LIBXML_HAS_XPATH_RESOURCE_LIMITS))) || \
+     defined(FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION)
+     xptrctxt->opLimit = ctxt->context->opLimit;
+     xptrctxt->opCount = ctxt->context->opCount;

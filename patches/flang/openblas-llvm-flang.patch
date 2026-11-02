@@ -1,0 +1,50 @@
+diff --git i/cmake/fc.cmake w/cmake/fc.cmake
+index fc1f9bb2..6d5b8aba 100644
+--- i/cmake/fc.cmake
++++ w/cmake/fc.cmake
+@@ -16,7 +16,9 @@ if (${F_COMPILER} STREQUAL "FLANG")
+   if (USE_OPENMP)
+     set(FCOMMON_OPT "${FCOMMON_OPT} -fopenmp")
+   endif ()
+-  set(FCOMMON_OPT "${FCOMMON_OPT} -Mrecursive -Kieee")
++  if (NOT CMAKE_Fortran_COMPILER_ID STREQUAL "LLVMFlang")
++    set(FCOMMON_OPT "${FCOMMON_OPT} -Mrecursive -Kieee")
++  endif ()
+ endif ()
+
+ if (${F_COMPILER} STREQUAL "G77")
+diff --git i/common.h w/common.h
+index 00b34a3f..f9b6a6b8 100644
+--- i/common.h
++++ w/common.h
+@@ -95,7 +95,7 @@ extern "C" {
+ #include <sched.h>
+ #endif
+
+-#if defined(OS_DARWIN) || defined(OS_FREEBSD) || defined(OS_NETBSD) || defined(OS_OPENBSD) || defined(OS_DRAGONFLY) || defined(OS_ANDROID)
++#if defined(OS_DARWIN) || defined(OS_IOS) || defined(OS_FREEBSD) || defined(OS_NETBSD) || defined(OS_OPENBSD) || defined(OS_DRAGONFLY) || defined(OS_ANDROID)
+ #include <sched.h>
+ #endif
+
+diff --git i/common_x86_64.h w/common_x86_64.h
+index 15d0c30a..96759481 100644
+--- i/common_x86_64.h
++++ w/common_x86_64.h
+@@ -378,7 +378,7 @@ static __inline unsigned int blas_quickdivide(unsigned int x, unsigned int y){
+ #define REALNAME ASMFNAME
+ #endif
+
+-#ifdef OS_DARWIN
++#if defined(OS_DARWIN) || defined(OS_IOS)
+ #define PROLOGUE .text;.align 5; .globl REALNAME; REALNAME:
+ #define EPILOGUE	.subsections_via_symbols
+ #define PROFCODE
+@@ -499,7 +499,7 @@ REALNAME:
+
+ #define HALT	hlt
+
+-#ifdef OS_DARWIN
++#if defined(OS_DARWIN) || defined(OS_IOS)
+ #define ALIGN_2 .align 2
+ #define ALIGN_3 .align 3
+ #define ALIGN_4 .align 4

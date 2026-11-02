@@ -1,0 +1,32 @@
+--- a/src/hb-ft.cc
++++ b/src/hb-ft.cc
+@@ -731,4 +731,5 @@
+ static void
+-hb_ft_face_finalize (FT_Face ft_face)
++hb_ft_face_finalize (void *data)
+ {
++  FT_Face ft_face = (FT_Face) data;
+   hb_face_destroy ((hb_face_t *) ft_face->generic.data);
+@@ -758,3 +759,3 @@
+ {
+-  if (unlikely (!ft_face->generic.data || ft_face->generic.finalizer != (FT_Generic_Finalizer) hb_ft_face_finalize))
++  if (unlikely (!ft_face->generic.data || ft_face->generic.finalizer != hb_ft_face_finalize))
+   {
+@@ -764,3 +765,3 @@
+     ft_face->generic.data = hb_ft_face_create (ft_face, nullptr);
+-    ft_face->generic.finalizer = (FT_Generic_Finalizer) hb_ft_face_finalize;
++    ft_face->generic.finalizer = hb_ft_face_finalize;
+   }
+@@ -951,4 +952,5 @@
+ static void
+-_release_blob (FT_Face ft_face)
++_release_blob (void *data)
+ {
++  FT_Face ft_face = (FT_Face) data;
+   hb_blob_destroy ((hb_blob_t *) ft_face->generic.data);
+@@ -1034,4 +1036,4 @@
+   ft_face->generic.data = blob;
+-  ft_face->generic.finalizer = (FT_Generic_Finalizer) _release_blob;
++  ft_face->generic.finalizer = _release_blob;
+
+   _hb_ft_font_set_funcs (font, ft_face, true);
